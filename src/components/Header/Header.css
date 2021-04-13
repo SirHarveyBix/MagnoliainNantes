@@ -9,7 +9,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px;
+  padding: 5px 15px;
 }
 .titleAvatar {
   font-size: 1em;

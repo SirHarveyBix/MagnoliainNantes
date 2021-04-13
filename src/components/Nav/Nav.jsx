@@ -8,19 +8,19 @@ function Nav() {
   return (
     <div className="footer">
       <div className="boxIcon">
-        <img src={Home} alt="home" className="home" />
+        <img src={Home} alt="home" className="icon" />
         <p>Home</p>
       </div>
-      <div>
-        <img src={Progress} alt="progress" className="plan" />
+      <div className="boxIcon">
+        <img src={Progress} alt="progress" className="icon" />
         <p>Progrès</p>
       </div>
-      <div>
-        <img src={Herbier} alt="herbier" className="herbier" />
+      <div className="boxIcon">
+        <img src={Herbier} alt="herbier" className="icon" />
         <p>Herbarium</p>
       </div>
-      <div>
-        <img src={Plan} alt="plan" className="plan" />
+      <div className="boxIcon">
+        <img src={Plan} alt="plan" className="icon" />
         <p>Plan</p>
       </div>
     </div>
