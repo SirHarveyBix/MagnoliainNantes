@@ -1,3 +1,7 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+// eslint-disable-next-line prettier/prettier
 import React from 'react';
 import './HerbariumCard.css';
 
@@ -7,7 +11,8 @@ const magnolia = {
   gender: 'Magnolia des tropiques ',
   location: 'Parc de la Chanterie',
 };
-function HerbariumCard() {
+
+function HerbariumCard({ logoCheck, checkAcquis }) {
   return (
     <div className="cardsHerbarium">
       <div className="imageCard">
@@ -26,9 +31,10 @@ function HerbariumCard() {
           <h3 className="title">Localisation</h3>
           <p className="content">{magnolia.location}</p>
           <img
-            src="https://cdn.discordapp.com/attachments/816732696658313229/831525323622318190/magnolia-icon-green.png"
+            src={logoCheck}
             alt="toggleImg"
             className="toggleImg"
+            onClick={checkAcquis}
           />
         </div>
       </div>
