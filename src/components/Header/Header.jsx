@@ -1,16 +1,16 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import Logo from './logo.png';
-import Avatar from './avataaars.png';
 import './Header.css';
 
-function Header() {
+function Header({ photoHeader, user }) {
   return (
     <div className="header">
       <img src={Logo} alt="logo" className="logo" />
 
       <div className="avatar">
-        <h2 className="titleAvatar"> Mr Tartenpion </h2>
-        <img src={Avatar} alt="avatar" className="avatarImg" />
+        <h2 className="titleAvatar">{user}</h2>
+        <img src={photoHeader} alt="" className="avatarImg" />
       </div>
     </div>
   );

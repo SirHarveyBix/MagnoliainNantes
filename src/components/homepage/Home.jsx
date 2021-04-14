@@ -1,4 +1,7 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable react/prop-types */
+import React, { useEffect } from 'react';
 import './Home.css';
 import logo from './logo.png';
 import avatar1 from './avatars(1).png';
@@ -8,32 +11,124 @@ import avatar4 from './avatars(4).png';
 import avatar5 from './avatars(5).png';
 import avatar6 from './avatars(6).png';
 
-function Home() {
+const Home = ({
+  photoHeader,
+  setPhotoHeader,
+  setUsername,
+  username,
+  user,
+  setUser,
+}) => {
+  const avatarImg = [
+    {
+      key: 1,
+      avatar: avatar1,
+    },
+    {
+      key: 2,
+      avatar: avatar2,
+    },
+    {
+      key: 3,
+      avatar: avatar3,
+    },
+    {
+      key: 4,
+      avatar: avatar4,
+    },
+    {
+      key: 5,
+      avatar: avatar5,
+    },
+    {
+      key: 6,
+      avatar: avatar6,
+    },
+  ];
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('name');
+    const loggedAvatar = localStorage.getItem('photo');
+    if (loggedInUser && loggedAvatar) {
+      setUser(loggedInUser);
+      setPhotoHeader(loggedAvatar);
+    }
+  }, [user, photoHeader]);
+
+  // logout the user
+  const handleLogout = () => {
+    setUser();
+    setUsername('');
+    setPhotoHeader('');
+    localStorage.clear();
+  };
+
+  // login the user
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // set the state of the user
+    setUser(username);
+    // store the user in localStorage
+    localStorage.setItem('name', username);
+    localStorage.setItem('photo', photoHeader);
+    console.log(user);
+    console.log(username);
+  };
+
+  // if there's a user show the message below
+  if (user) {
+    return (
+      <div className="home-welcome">
+        <h2 className="home-welcome-text">
+          Bienvenue <span>{user}</span>, en forme pour remplir votre herbier ?
+          Ne perdez pas de temps ! 🌱🍁🌳
+        </h2>
+        <img src={photoHeader} alt="" className="home-welcome-img" />
+        <button type="button" onClick={handleLogout} className="home-btn">
+          Se déconnecter
+        </button>
+      </div>
+    );
+  }
   return (
     <div className="home">
       <div className="home-header">
         <img className="home-header-img" src={logo} alt="logo magnolia" />
       </div>
-      <div className="home-section-profil">
-        <h2>Choisissez votre pseudo :</h2>
-        <input type="text" placeholder="Pseudo" required />
-      </div>
-      <div className="home-section-avatar">
-        <h2>Choisissez votre avatar :</h2>
-        <div className="home-section-avatar-img">
-          <img src={avatar1} alt="avatar" />
-          <img src={avatar3} alt="avatar1" />
-          <img src={avatar4} alt="avatar1" />
-          <img src={avatar2} alt="avatar1" />
-          <img src={avatar5} alt="avatar1" />
-          <img src={avatar6} alt="avatar1" />
+      <form onSubmit={handleSubmit}>
+        <div className="home-section-profil">
+          <h2>Choisissez votre pseudo :</h2>
+          <input
+            type="text"
+            placeholder="Pseudo"
+            value={username}
+            required
+            onChange={({ target }) => setUsername(target.value)}
+          />
         </div>
-      </div>
-      <div className="home-button">
-        <button type="button">VALIDER</button>
-      </div>
+        <div className="home-section-avatar">
+          <h2>Choisissez votre avatar :</h2>
+          <div className="home-section-avatar-img">
+            {avatarImg.map((photo) => (
+              <img
+                key={photo.key}
+                id={photo.key}
+                src={photo.avatar}
+                alt="avatar"
+                className="avatar"
+                onClick={() => setPhotoHeader(photo.avatar)}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="home-button">
+          <button className="home-btn" type="submit">
+            VALIDER
+          </button>
+        </div>
+      </form>
     </div>
   );
-}
+};
 
 export default Home;
