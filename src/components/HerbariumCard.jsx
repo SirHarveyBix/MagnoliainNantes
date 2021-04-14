@@ -10,22 +10,28 @@ const magnolia = {
 function HerbariumCard() {
   return (
     <div className="cardsHerbarium">
-      <img src={magnolia.image} alt="photoMagnolia" className="photoMagnolia" />
+      <div className="imageCard">
+        <img
+          src={magnolia.image}
+          alt="photoMagnolia"
+          className="photoMagnolia"
+        />
+      </div>
       <div className="infoCard">
         <div className="gender">
-          <h3 className="title">Genre</h3>
+          <h3 className="title">Espèce</h3>
           <p className="content">{magnolia.gender}</p>
         </div>
         <div className="location">
           <h3 className="title">Localisation</h3>
           <p className="content">{magnolia.location}</p>
+          <img
+            src="https://cdn.discordapp.com/attachments/816732696658313229/831525323622318190/magnolia-icon-green.png"
+            alt="toggleImg"
+            className="toggleImg"
+          />
         </div>
       </div>
-      <img
-        src="https://cdn.discordapp.com/attachments/816732696658313229/831525323622318190/magnolia-icon-green.png"
-        alt="toggleImg"
-        className="toggleImg"
-      />
     </div>
   );
 }
