@@ -24,4 +24,21 @@
   .avatarImg {
     width: 60px;
   }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 15px;
+}
+.titleAvatar {
+  font-size: 1em;
+  font-family: 'Inter', sans-serif;
+  margin-right: 15px;
+}
+.avatar {
+  display: flex;
+  align-items: center;
+}
+.avatarImg {
+  width: 60px;
 }
