@@ -1,6 +1,3 @@
-/* eslint-disable react/prop-types /
-/ eslint-disable jsx-a11y/no-noninteractive-element-interactions /
-/ eslint-disable jsx-a11y/click-events-have-key-events */
 import { useState } from 'react';
 import HerbariumCard from './components/HerbariumCard';
 import checkGreen from './components/checkGreen.png';
@@ -10,7 +7,6 @@ import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
 import './components/Nav/Nav.css';
 import Home from './components/homepage/Home';
-
 
 function App() {
   const [logoCheck, setLogoCheck] = useState(checkBlack);
