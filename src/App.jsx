@@ -7,17 +7,22 @@ function App() {
   const [photoHeader, setPhotoHeader] = useState(null);
   const [username, setUsername] = useState('');
   const [user, setUser] = useState('');
+  const [homeActive, setHomeActive] = useState(false);
 
   return (
     <div className="App">
-      <Header
-        photoHeader={photoHeader}
-        setPhotoHeader={setPhotoHeader}
-        username={username}
-        setUsername={setUsername}
-        user={user}
-        setUser={setUser}
-      />
+      {homeActive === true ? (
+        <Header
+          photoHeader={photoHeader}
+          setPhotoHeader={setPhotoHeader}
+          username={username}
+          setUsername={setUsername}
+          user={user}
+          setUser={setUser}
+        />
+      ) : (
+        ''
+      )}
 
       <Nav
         photoHeader={photoHeader}
@@ -26,6 +31,8 @@ function App() {
         setUsername={setUsername}
         user={user}
         setUser={setUser}
+        setHomeActive={setHomeActive}
+        homeActive={homeActive}
       />
     </div>
   );

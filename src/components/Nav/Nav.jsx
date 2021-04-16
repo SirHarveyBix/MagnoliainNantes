@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import Home from './Home.svg';
@@ -13,6 +15,7 @@ function Nav({
   user,
   setUser,
   photoHeader,
+  setHomeActive,
 }) {
   return (
     <Router>
@@ -20,12 +23,16 @@ function Nav({
         <div className="footer">
           <div className="boxIcon">
             <Link to="/">
-              <img src={Home} alt="home" />
+              <img src={Home} alt="home" onClick={() => setHomeActive(false)} />
             </Link>
             <p>Home</p>
           </div>
           <div className="boxIcon">
-            <img src={Progress} alt="progress" />
+            <img
+              src={Progress}
+              alt="progress"
+              onClick={() => setHomeActive(true)}
+            />
             <p>Progres</p>
           </div>
           <div className="boxIcon">
