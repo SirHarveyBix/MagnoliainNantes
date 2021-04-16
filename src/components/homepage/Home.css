@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+
 html,
 body,
 div,
@@ -123,6 +125,9 @@ table {
   border-spacing: 0;
 }
 body {
+  font-family: 'Inter', sans-serif;
+}
+form {
   font-family: 'Inter', sans-serif;
 }
 .home {

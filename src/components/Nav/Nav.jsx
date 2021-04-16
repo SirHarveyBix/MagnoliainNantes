@@ -7,6 +7,7 @@ import Herbier from './Herbier.svg';
 import Plan from './Plan.svg';
 import Progress from './progress.svg';
 import HomePage from '../homepage/Home';
+import HerbariumCard from '../Herbarium/HerbariumCard';
 
 function Nav({
   setPhotoHeader,
@@ -16,6 +17,8 @@ function Nav({
   setUser,
   photoHeader,
   setHomeActive,
+  checkAcquis,
+  logoCheck,
 }) {
   return (
     <Router>
@@ -33,10 +36,17 @@ function Nav({
               alt="progress"
               onClick={() => setHomeActive(true)}
             />
+
             <p>Progres</p>
           </div>
           <div className="boxIcon">
-            <img src={Herbier} alt="herbier" />
+            <Link to="/Herbarium/">
+              <img
+                src={Herbier}
+                alt="herbier"
+                onClick={() => setHomeActive(true)}
+              />
+            </Link>
             <p>Herbarium</p>
           </div>
           <div className="boxIcon">
@@ -46,6 +56,9 @@ function Nav({
         </div>
 
         <Switch>
+          <Route path="/Herbarium/">
+            <HerbariumCard checkAcquis={checkAcquis} logoCheck={logoCheck} />
+          </Route>
           <Route path="/">
             <HomePage
               photoHeader={photoHeader}
