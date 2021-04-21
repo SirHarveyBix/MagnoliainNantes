@@ -45,6 +45,9 @@ const Home = ({
       avatar: avatar6,
     },
   ];
+
+  const [avatarActive, setAvatarActive] = useState(0);
+
   useEffect(() => {
     const loggedInUser = localStorage.getItem('name');
     const loggedAvatar = localStorage.getItem('photo');
@@ -88,8 +91,6 @@ const Home = ({
       </div>
     );
   }
-
-  const [avatarActive, setAvatarActive] = useState(0);
 
   return (
     <div className="home">
