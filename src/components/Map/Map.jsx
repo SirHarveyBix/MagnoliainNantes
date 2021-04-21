@@ -27,7 +27,8 @@ const Map = ({ photoHeader }) => {
   const [countProce, setCountProce] = useState(0);
   const [isFound, setIsFound] = useState([]);
   const [parc, SetParc] = useState([]);
-  const [parcfilter, setParcFilter] = useState(parc);
+  const [parcfilter, setParcFilter] = useState([]);
+  const [newParc, setNewParc] = useState([]);
   const [countTotal, setCountTotal] = useState([]);
   const [topPlant, SetTopPlant] = useState([]);
   const [showAll, setShowAll] = useState([]);
@@ -35,6 +36,7 @@ const Map = ({ photoHeader }) => {
   const GetTopPlant = async () => {
     const temp = await fetch(`https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_collection-vegetale-nantes&q=&rows=400&start=0&refine.genre=Magnolia
     `).then((res) => res.json());
+
     SetTopPlant(temp.records);
     setShowAll(
       temp.records.filter(
@@ -47,29 +49,40 @@ const Map = ({ photoHeader }) => {
       )
     );
   };
+
   const GetParc = async () => {
     const tempo = await fetch(`https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_parcs-jardins-nantes&q=&rows=100
       `).then((res) => res.json());
     SetParc(tempo.records);
+    const newarray = {
+      fields: {
+        nom_complet: 'Cimetière Parc',
+        adresse: 'Chemin de la justice',
+        location: [47.269653, -1.584945],
+      },
+    };
 
+    SetParc(tempo.records.concat(newarray));
     setParcFilter(
-      tempo.records.filter(
+      parc.filter(
         (valeur) =>
           valeur.fields.nom_complet === 'Parc de Procé' ||
           valeur.fields.nom_complet === 'Parc Floral de la Beaujoire' ||
-          valeur.fields.nom_complet === 'Cimetière Parc Paysager' ||
           valeur.fields.nom_complet === 'Jardin des Plantes' ||
           valeur.fields.nom_complet === 'Parc du Grand Blottereau' ||
-          valeur.fields.nom_complet === 'Parc de la Gaudinière'
+          valeur.fields.nom_complet === 'Parc de la Gaudinière' ||
+          valeur.fields.nom_complet === 'Cimetière Parc'
       )
     );
   };
+
   useEffect(() => {
     GetParc();
   }, []);
   useEffect(() => {
     GetTopPlant();
   }, []);
+
   // function to get distance beetween user and all plant
   function getDistance(origin, destination) {
     // return distance in meters
@@ -141,7 +154,7 @@ const Map = ({ photoHeader }) => {
         : ''
     );
   };
-
+  console.log(parc);
   console.log(allPlants);
   console.log(location);
   console.log(parcfilter);
@@ -202,6 +215,12 @@ const Map = ({ photoHeader }) => {
                               total.fields.nom_du_site ===
                               'Parc exotique du Grand-Blottereau'
                           ).length
+                        : '' || parc.fields.nom_complet === 'Cimetière Parc'
+                        ? showAll.filter(
+                            (total) =>
+                              total.fields.nom_du_site ===
+                              'Arboretum Cimetière Parc'
+                          ).length
                         : ''}
                     </p>
                   </div>
@@ -222,6 +241,8 @@ const Map = ({ photoHeader }) => {
                       : '' ||
                         parc.fields.nom_complet === 'Parc de la Gaudinière'
                       ? Proce
+                      : '' || parc.fields.nom_complet === 'Cimetière Parc'
+                      ? Jplante
                       : ''
                   }
                   className="imgParc"
