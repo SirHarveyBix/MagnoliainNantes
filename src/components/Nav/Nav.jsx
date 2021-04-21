@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
@@ -13,6 +14,7 @@ import Plan from './Plan.svg';
 import Progress from './progress.svg';
 import HomePage from '../homepage/Home';
 import HerbariumCard from '../Herbarium/HerbariumCard';
+import Map from '../Map/Map';
 
 function Nav({
   setPhotoHeader,
@@ -28,7 +30,7 @@ function Nav({
   return (
     <Router>
       <div>
-        <div className="footer">
+        <div className="footer nav">
           <div className="boxIcon">
             <NavLink
               exact
@@ -66,7 +68,14 @@ function Nav({
             <p>Herbarium</p>
           </div>
           <div className="boxIcon">
-            <img src={Plan} alt="plan" />
+            <NavLink
+              exact
+              to="/Map/"
+              className="main-nav"
+              activeClassName="main-nav-active"
+            >
+              <img src={Plan} alt="plan" onClick={() => setHomeActive(true)} />
+            </NavLink>
             <p>Plans</p>
           </div>
         </div>
@@ -74,6 +83,9 @@ function Nav({
         <Switch>
           <Route path="/Herbarium/">
             <HerbariumCard checkAcquis={checkAcquis} logoCheck={logoCheck} />
+          </Route>
+          <Route path="/Map/">
+            <Map photoHeader={photoHeader} />
           </Route>
           <Route path="/">
             <HomePage
