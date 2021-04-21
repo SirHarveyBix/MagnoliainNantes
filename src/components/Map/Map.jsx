@@ -62,17 +62,18 @@ const Map = ({ photoHeader }) => {
       },
     };
 
-    SetParc(tempo.records.concat(newarray));
-    setParcFilter(
-      parc.filter(
-        (valeur) =>
-          valeur.fields.nom_complet === 'Parc de Procé' ||
-          valeur.fields.nom_complet === 'Parc Floral de la Beaujoire' ||
-          valeur.fields.nom_complet === 'Jardin des Plantes' ||
-          valeur.fields.nom_complet === 'Parc du Grand Blottereau' ||
-          valeur.fields.nom_complet === 'Parc de la Gaudinière' ||
-          valeur.fields.nom_complet === 'Cimetière Parc'
-      )
+    SetParc(
+      tempo.records
+        .concat(newarray)
+        .filter(
+          (valeur) =>
+            valeur.fields.nom_complet === 'Parc de Procé' ||
+            valeur.fields.nom_complet === 'Parc Floral de la Beaujoire' ||
+            valeur.fields.nom_complet === 'Jardin des Plantes' ||
+            valeur.fields.nom_complet === 'Parc du Grand Blottereau' ||
+            valeur.fields.nom_complet === 'Parc de la Gaudinière' ||
+            valeur.fields.nom_complet === 'Cimetière Parc'
+        )
     );
   };
 
@@ -168,8 +169,8 @@ const Map = ({ photoHeader }) => {
         {location.coordinates.lng}{' '}
       </p>
       <div className="BoxMap">
-        {parcfilter &&
-          parcfilter.map((parc) => (
+        {parc &&
+          parc.map((parc) => (
             <div className="CardMap">
               <div className="CardInfo">
                 <div className="CardInfoTxt">
