@@ -166,6 +166,10 @@ body {
   height: 100px;
   margin: 0 15px 28px 15px;
 }
+.avatar-active {
+  border: 1px solid black;
+  border-radius: 50%;
+}
 .home-button {
   text-align: center;
 }

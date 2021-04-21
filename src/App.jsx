@@ -18,7 +18,6 @@ function App() {
         user={user}
         setUser={setUser}
       />
-
       <Nav
         photoHeader={photoHeader}
         setPhotoHeader={setPhotoHeader}

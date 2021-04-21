@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css';
 import logo from './logo.png';
 import avatar1 from './avatars(1).png';
@@ -71,8 +71,6 @@ const Home = ({
     // store the user in localStorage
     localStorage.setItem('name', username);
     localStorage.setItem('photo', photoHeader);
-    console.log(user);
-    console.log(username);
   };
 
   // if there's a user show the message below
@@ -83,13 +81,16 @@ const Home = ({
           Bienvenue <span>{user}</span>, en forme pour remplir votre herbier ?
           Ne perdez pas de temps ! 🌱🍁🌳
         </h2>
-        <img src={photoHeader} alt="" className="home-welcome-img" />
+        <img src={photoHeader} alt="" className="home-welcome-img" onClick />
         <button type="button" onClick={handleLogout} className="home-btn">
           Se déconnecter
         </button>
       </div>
     );
   }
+
+  const [avatarActive, setAvatarActive] = useState(0);
+
   return (
     <div className="home">
       <div className="home-header">
@@ -115,8 +116,11 @@ const Home = ({
                 id={photo.key}
                 src={photo.avatar}
                 alt="avatar"
-                className="avatar"
-                onClick={() => setPhotoHeader(photo.avatar)}
+                className={photo.key === avatarActive ? 'avatar-active' : ''}
+                onClick={() => {
+                  setPhotoHeader(photo.avatar);
+                  setAvatarActive(photo.key);
+                }}
               />
             ))}
           </div>
