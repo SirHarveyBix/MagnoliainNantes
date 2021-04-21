@@ -132,11 +132,13 @@ form {
 }
 .home {
   margin-bottom: 100px;
+  font-family: 'Inter', sans-serif;
 }
 .home-header {
   display: flex;
   flex-direction: column;
   margin: 16px auto 0 auto;
+  font-family: 'Inter', sans-serif;
 }
 .home-header-img {
   width: 185px;
@@ -196,6 +198,7 @@ form {
   line-height: 1.4em;
   letter-spacing: 0.01em;
   margin: 64px 45px 30px 45px;
+  font-family: 'Inter', sans-serif;
 }
 .home-welcome-text span {
   color: #53d496;

@@ -1,7 +1,12 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+} from 'react-router-dom';
 import Home from './Home.svg';
 import Herbier from './Herbier.svg';
 import Plan from './Plan.svg';
@@ -25,9 +30,14 @@ function Nav({
       <div>
         <div className="footer">
           <div className="boxIcon">
-            <Link to="/">
+            <NavLink
+              exact
+              to="/"
+              className="main-nav"
+              activeClassName="main-nav-active"
+            >
               <img src={Home} alt="home" onClick={() => setHomeActive(false)} />
-            </Link>
+            </NavLink>
             <p>Home</p>
           </div>
           <div className="boxIcon">
@@ -40,13 +50,19 @@ function Nav({
             <p>Progres</p>
           </div>
           <div className="boxIcon">
-            <Link to="/Herbarium/">
+            <NavLink
+              exact
+              to="/Herbarium/"
+              className="main-nav"
+              activeClassName="main-nav-active"
+            >
               <img
                 src={Herbier}
                 alt="herbier"
                 onClick={() => setHomeActive(true)}
+                className="svg"
               />
-            </Link>
+            </NavLink>
             <p>Herbarium</p>
           </div>
           <div className="boxIcon">
