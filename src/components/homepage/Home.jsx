@@ -84,7 +84,7 @@ const Home = ({
           Bienvenue <span>{user}</span>, en forme pour remplir votre herbier ?
           Ne perdez pas de temps ! 🌱🍁🌳
         </h2>
-        <img src={photoHeader} alt="" className="home-welcome-img" onClick />
+        <img src={photoHeader} alt="" className="home-welcome-img" />
         <button type="button" onClick={handleLogout} className="home-btn">
           Se déconnecter
         </button>

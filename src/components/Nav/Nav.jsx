@@ -7,12 +7,12 @@ import {
   Route,
   NavLink,
 } from 'react-router-dom';
-import Home from './Home.svg';
-import Herbier from './Herbier.svg';
-import Plan from './Plan.svg';
-import Progress from './progress.svg';
 import HomePage from '../homepage/Home';
 import HerbariumCard from '../Herbarium/HerbariumCard';
+import HomeSvg from './HomeSvg';
+import ProgressSvg from './ProgressSvg';
+import HerbierSvg from './HerbierSvg';
+import PlansSvg from './PlansSvg';
 
 function Nav({
   setPhotoHeader,
@@ -27,66 +27,68 @@ function Nav({
 }) {
   return (
     <Router>
-      <div>
-        <div className="footer">
-          <div className="boxIcon">
-            <NavLink
-              exact
-              to="/"
-              className="main-nav"
-              activeClassName="main-nav-active"
-            >
-              <img src={Home} alt="home" onClick={() => setHomeActive(false)} />
-            </NavLink>
+      <nav className="footer">
+        <div className="boxIcon">
+          <NavLink
+            exact
+            to="/"
+            className="main-nav"
+            activeClassName="main-nav-active"
+          >
+            <HomeSvg fill="white" onClick={() => setHomeActive(false)} />
             <p>Home</p>
-          </div>
-          <div className="boxIcon">
-            <img
-              src={Progress}
-              alt="progress"
-              onClick={() => setHomeActive(true)}
-            />
-
-            <p>Progres</p>
-          </div>
-          <div className="boxIcon">
-            <NavLink
-              exact
-              to="/Herbarium/"
-              className="main-nav"
-              activeClassName="main-nav-active"
-            >
-              <img
-                src={Herbier}
-                alt="herbier"
-                onClick={() => setHomeActive(true)}
-                className="svg"
-              />
-            </NavLink>
-            <p>Herbarium</p>
-          </div>
-          <div className="boxIcon">
-            <img src={Plan} alt="plan" />
-            <p>Plans</p>
-          </div>
+          </NavLink>
         </div>
+        <div className="boxIcon">
+          <NavLink
+            exact
+            to="/"
+            className="main-nav"
+            activeClassName="main-nav-active"
+          >
+            <ProgressSvg fill="white" onClick={() => setHomeActive(false)} />
+            <p>Progress</p>
+          </NavLink>
+        </div>
+        <div className="boxIcon">
+          <NavLink
+            exact
+            to="/Herbarium/"
+            className="main-nav"
+            activeClassName="main-nav-active"
+          >
+            <HerbierSvg fill="white" onClick={() => setHomeActive(false)} />
+            <p>Herbier</p>
+          </NavLink>
+        </div>
+        <div className="boxIcon">
+          <NavLink
+            exact
+            to="/"
+            className="main-nav"
+            activeClassName="main-nav-active"
+          >
+            <PlansSvg fill="white" onClick={() => setHomeActive(false)} />
+            <p>Plans</p>
+          </NavLink>
+        </div>
+      </nav>
 
-        <Switch>
-          <Route path="/Herbarium/">
-            <HerbariumCard checkAcquis={checkAcquis} logoCheck={logoCheck} />
-          </Route>
-          <Route path="/">
-            <HomePage
-              photoHeader={photoHeader}
-              setPhotoHeader={setPhotoHeader}
-              username={username}
-              setUsername={setUsername}
-              user={user}
-              setUser={setUser}
-            />
-          </Route>
-        </Switch>
-      </div>
+      <Switch>
+        <Route path="/Herbarium/">
+          <HerbariumCard checkAcquis={checkAcquis} logoCheck={logoCheck} />
+        </Route>
+        <Route path="/">
+          <HomePage
+            photoHeader={photoHeader}
+            setPhotoHeader={setPhotoHeader}
+            username={username}
+            setUsername={setUsername}
+            user={user}
+            setUser={setUser}
+          />
+        </Route>
+      </Switch>
     </Router>
   );
 }
