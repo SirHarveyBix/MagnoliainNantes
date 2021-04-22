@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Home.css';
 import logo from './logo.png';
 import avatar1 from './avatars(1).png';
@@ -45,6 +45,9 @@ const Home = ({
       avatar: avatar6,
     },
   ];
+
+  const [avatarActive, setAvatarActive] = useState(0);
+
   useEffect(() => {
     const loggedInUser = localStorage.getItem('name');
     const loggedAvatar = localStorage.getItem('photo');
@@ -71,8 +74,6 @@ const Home = ({
     // store the user in localStorage
     localStorage.setItem('name', username);
     localStorage.setItem('photo', photoHeader);
-    console.log(user);
-    console.log(username);
   };
 
   // if there's a user show the message below
@@ -90,6 +91,7 @@ const Home = ({
       </div>
     );
   }
+
   return (
     <div className="home">
       <div className="home-header">
@@ -115,8 +117,11 @@ const Home = ({
                 id={photo.key}
                 src={photo.avatar}
                 alt="avatar"
-                className="avatar"
-                onClick={() => setPhotoHeader(photo.avatar)}
+                className={photo.key === avatarActive ? 'avatar-active' : ''}
+                onClick={() => {
+                  setPhotoHeader(photo.avatar);
+                  setAvatarActive(photo.key);
+                }}
               />
             ))}
           </div>

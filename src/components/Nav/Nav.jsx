@@ -8,13 +8,15 @@ import {
   Route,
   NavLink,
 } from 'react-router-dom';
-import Home from './Home.svg';
-import Herbier from './Herbier.svg';
-import Plan from './Plan.svg';
-import Progress from './progress.svg';
 import HomePage from '../homepage/Home';
 import HerbariumCard from '../Herbarium/HerbariumCard';
 import Map from '../Map/Map';
+
+import HomeSvg from './HomeSvg';
+import ProgressSvg from './ProgressSvg';
+import HerbierSvg from './HerbierSvg';
+import PlansSvg from './PlansSvg';
+
 
 function Nav({
   setPhotoHeader,
@@ -29,6 +31,7 @@ function Nav({
 }) {
   return (
     <Router>
+
       <div>
         <div className="footer nav">
           <div className="boxIcon">
@@ -76,9 +79,54 @@ function Nav({
             >
               <img src={Plan} alt="plan" onClick={() => setHomeActive(true)} />
             </NavLink>
-            <p>Plans</p>
-          </div>
+
+      <nav className="footer">
+        <div className="boxIcon">
+          <NavLink
+            exact
+            to="/"
+            className="main-nav"
+            activeClassName="main-nav-active"
+          >
+            <HomeSvg fill="white" onClick={() => setHomeActive(false)} />
+            <p>Home</p>
+          </NavLink>
         </div>
+        <div className="boxIcon">
+          <NavLink
+            exact
+            to="/"
+            className="main-nav"
+            activeClassName="main-nav-active"
+          >
+            <ProgressSvg fill="white" onClick={() => setHomeActive(false)} />
+            <p>Progrès</p>
+          </NavLink>
+        </div>
+        <div className="boxIcon">
+          <NavLink
+            exact
+            to="/Herbarium/"
+            className="main-nav"
+            activeClassName="main-nav-active"
+          >
+            <HerbierSvg fill="white" onClick={() => setHomeActive(false)} />
+            <p>Herbier</p>
+          </NavLink>
+        </div>
+        <div className="boxIcon">
+          <NavLink
+            exact
+            to="/"
+            className="main-nav"
+            activeClassName="main-nav-active"
+          >
+            <PlansSvg fill="white" onClick={() => setHomeActive(false)} />
+
+            <p>Plans</p>
+          </NavLink>
+        </div>
+      </nav>
 
         <Switch>
           <Route path="/Herbarium/">
@@ -99,6 +147,21 @@ function Nav({
           </Route>
         </Switch>
       </div>
+      <Switch>
+        <Route path="/Herbarium/">
+          <HerbariumCard checkAcquis={checkAcquis} logoCheck={logoCheck} />
+        </Route>
+        <Route path="/">
+          <HomePage
+            photoHeader={photoHeader}
+            setPhotoHeader={setPhotoHeader}
+            username={username}
+            setUsername={setUsername}
+            user={user}
+            setUser={setUser}
+          />
+        </Route>
+      </Switch>
     </Router>
   );
 }
