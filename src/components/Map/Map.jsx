@@ -32,6 +32,10 @@ const Map = ({ photoHeader }) => {
   const [countTotal, setCountTotal] = useState([]);
   const [topPlant, SetTopPlant] = useState([]);
   const [showAll, setShowAll] = useState([]);
+  const [countBeaujoire, setCountBeaujoire] = useState(0);
+  const [countCimetière, setCountCimetière] = useState(0);
+  const [countGaudinière, setCountGaudinière] = useState(0);
+  const [countBlotereau, setCountBlotereau] = useState(0);
 
   const GetTopPlant = async () => {
     const temp = await fetch(`https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_collection-vegetale-nantes&q=&rows=400&start=0&refine.genre=Magnolia
@@ -62,7 +66,7 @@ const Map = ({ photoHeader }) => {
       },
     };
 
-    SetParc(
+    setParcFilter(
       tempo.records
         .concat(newarray)
         .filter(
@@ -130,12 +134,13 @@ const Map = ({ photoHeader }) => {
       location.coordinates.lng,
     ]);
     plant.distance = parseInt(distance.toFixed(0));
-    plant.isFound = false;
+    plant.isfound = false;
     return plant;
   });
 
-  function add(cont, setCont) {
+  function add(cont, setCont, position) {
     const newcount = cont + 1;
+    position = true;
     setCont(newcount);
   }
 
@@ -145,13 +150,31 @@ const Map = ({ photoHeader }) => {
     plantFound.push(e.target.id);
     console.log(plantFound);
     setIsFound(plantFound);
+    localStorage.setItem('isfound', plantFound);
     allPlants.map((position) =>
+      position.distance <= 1300 &&
       position.fields.nom_du_site === 'Jardin des Plantes'
-        ? add(countPlante, setCountPlant)
+        ? add(countPlante, setCountPlant, position.isfound)
         : '' ||
           (position.distance <= 1300 &&
             position.fields.nom_du_site === 'Parc de Procé')
         ? add(countProce, setCountProce)
+        : '' ||
+          (position.distance <= 1300 &&
+            position.fields.nom_du_site === 'Parc floral de la Beaujoire')
+        ? add(countBeaujoire, setCountBeaujoire)
+        : '' ||
+          (position.distance <= 1300 &&
+            position.fields.nom_du_site === 'Parc de la Gaudinière')
+        ? add(countGaudinière, setCountGaudinière)
+        : '' ||
+          (position.distance <= 1300 &&
+            position.fields.nom_du_site === 'Parc exotique du Grand-Blottereau')
+        ? add(countBlotereau, setCountBlotereau)
+        : '' ||
+          (position.distance <= 1300 &&
+            position.fields.nom_du_site === 'Arboretum Cimetière Parc')
+        ? add(countCimetière, setCountCimetière)
         : ''
     );
   };
@@ -161,6 +184,8 @@ const Map = ({ photoHeader }) => {
   console.log(parcfilter);
   console.log(topPlant);
   console.log(showAll);
+  console.log(countGaudinière);
+  console.log(countPlante);
 
   return (
     <div>
@@ -169,8 +194,8 @@ const Map = ({ photoHeader }) => {
         {location.coordinates.lng}{' '}
       </p>
       <div className="BoxMap">
-        {parc &&
-          parc.map((parc) => (
+        {parcfilter &&
+          parcfilter.map((parc) => (
             <div className="CardMap">
               <div className="CardInfo">
                 <div className="CardInfoTxt">
@@ -182,6 +207,18 @@ const Map = ({ photoHeader }) => {
                         ? countPlante
                         : '' || parc.fields.nom_complet === 'Parc de Procé'
                         ? countProce
+                        : '' ||
+                          parc.fields.nom_complet ===
+                            'Parc Floral de la Beaujoire'
+                        ? countBeaujoire
+                        : '' ||
+                          parc.fields.nom_complet === 'Parc de la Gaudinière'
+                        ? countGaudinière
+                        : '' ||
+                          parc.fields.nom_complet === 'Parc du Grand Blottereau'
+                        ? countBlotereau
+                        : '' || parc.fields.nom_complet === 'Cimetière Parc'
+                        ? countCimetière
                         : ''}
                       /
                       {parc.fields.nom_complet === 'Parc de Procé'
@@ -276,7 +313,9 @@ const Map = ({ photoHeader }) => {
                       <Popup keepInView closeButton={false}>
                         Espèce : {plant.fields.espece}
                         <p>
-                          {plant.distance <= 1300
+                          {isFound.includes(plant.recordid)
+                            ? 'Vous avez déjà cette plante'
+                            : plant.distance <= 1300
                             ? `Vous êtes à ${plant.distance} mètres de ce magnolia vous pouvez le cueillir `
                             : `Vous êtes à ${plant.distance} mètres de ce magnolia`}
                         </p>
@@ -286,7 +325,7 @@ const Map = ({ photoHeader }) => {
                             onClick={(e) => counter(e)}
                             disabled={
                               !(
-                                plant.distance <= 1400 &&
+                                plant.distance <= 1300 &&
                                 !isFound.includes(plant.recordid)
                               )
                             }
