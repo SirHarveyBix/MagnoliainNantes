@@ -47,7 +47,7 @@ function Nav({
             activeClassName="main-nav-active"
           >
             <ProgressSvg fill="white" onClick={() => setHomeActive(false)} />
-            <p>Progress</p>
+            <p>Progrès</p>
           </NavLink>
         </div>
         <div className="boxIcon">
