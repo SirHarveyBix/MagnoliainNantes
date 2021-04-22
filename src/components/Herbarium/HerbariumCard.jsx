@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React from 'react';
+import React, { useState } from 'react';
+import checkGreen from './checkGreen.png';
+import checkBlack from './checkBlack.png';
 import './HerbariumCard.css';
 
 const magnolia = {
@@ -11,7 +13,18 @@ const magnolia = {
   location: 'Parc de la Chanterie',
 };
 
-function HerbariumCard({ logoCheck, checkAcquis }) {
+function HerbariumCard() {
+  const [logoCheck, setLogoCheck] = useState(checkBlack);
+  const [acquisition, setAcquisition] = useState(false);
+
+  function checkAcquis() {
+    setAcquisition(!acquisition);
+    if (logoCheck === checkBlack) {
+      setLogoCheck(checkGreen);
+    } else if (logoCheck === checkGreen) {
+      setLogoCheck(checkBlack);
+    }
+  }
   return (
     <div className="cardsHerbarium">
       <div className="imageCard">

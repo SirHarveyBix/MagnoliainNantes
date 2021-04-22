@@ -1,29 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
-@media screen and (max-width: 414px) {
-  .logo {
-    width: 120px;
-    height: auto;
-  }
+.logo {
+  width: 120px;
+  height: auto;
+}
 
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-  }
-  .titleAvatar {
-    font-size: 1em;
-    font-family: 'Inter', sans-serif;
-    margin-right: 15px;
-  }
-  .avatar {
-    display: flex;
-    align-items: center;
-  }
-  .avatarImg {
-    width: 60px;
-  }
+.titleAvatar {
+  font-size: 1em;
+  font-family: 'Inter', sans-serif;
+  margin-right: 15px;
+}
+.avatar {
+  display: flex;
+  align-items: center;
+}
+.avatarImg {
+  width: 60px;
+}
 .header {
   display: flex;
   justify-content: space-between;
