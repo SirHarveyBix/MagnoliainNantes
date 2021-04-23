@@ -13,7 +13,7 @@ import Herbier from './Herbier.svg';
 import Plan from './Plan.svg';
 import Progress from './progress.svg';
 import HomePage from '../homepage/Home';
-import HerbariumCard from '../Herbarium/HerbariumCard';
+import HerbariumListo from '../Herbarium/HerbariumListo';
 import Map from '../Map/Map';
 
 function Nav({
@@ -26,6 +26,11 @@ function Nav({
   setHomeActive,
   checkAcquis,
   logoCheck,
+  showAll,
+  GetMagnolia,
+  setShowAll,
+  magnoliaArray,
+  setMagnoliaArray,
 }) {
   return (
     <Router>
@@ -82,7 +87,15 @@ function Nav({
 
         <Switch>
           <Route path="/Herbarium/">
-            <HerbariumCard checkAcquis={checkAcquis} logoCheck={logoCheck} />
+            <HerbariumListo
+              checkAcquis={checkAcquis}
+              logoCheck={logoCheck}
+              GetMagnolia={GetMagnolia}
+              showAll={showAll}
+              setShowAll={setShowAll}
+              magnoliaArray={magnoliaArray}
+              setMagnoliaArray={setMagnoliaArray}
+            />
           </Route>
           <Route path="/Map/">
             <Map photoHeader={photoHeader} />

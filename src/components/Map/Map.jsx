@@ -89,15 +89,15 @@ const Map = ({ photoHeader }) => {
     GetTopPlant();
   }, []);
   useEffect(() => {
-    const contJardinPlant = localStorage.getItem('contJardinPlante');
     const plantfound = localStorage.getItem('isfound');
-    const total = localStorage.getItem('total');
-    const totalPlante = localStorage.getItem('totalJplante');
-    if (contJardinPlant && plantfound && total && totalPlante) {
-      setCountPlant(parseInt(contJardinPlant) + 1);
+    const tot = localStorage.getItem('total');
+    const totPlante = localStorage.getItem('contJardinPlante');
+    const totProce = localStorage.getItem('totalProce');
+    if (plantfound && tot && (totPlante || totProce)) {
       setIsFound(plantfound);
-      setCountTotal(parseInt(total) + 1);
-      setCountPlant(parseInt(totalPlante) + 1);
+      setCountTotal(parseInt(tot) + 1);
+      setCountPlant(parseInt(totPlante) + 1);
+      setCountProce(parseInt(totProce) + 1);
     }
   }, []);
 
@@ -160,7 +160,6 @@ const Map = ({ photoHeader }) => {
   function add(cont, setCont) {
     const newcount = cont + 1;
     setCont(newcount);
-    localStorage.setItem('totalJplante', countPlante);
   }
 
   const counter = (e) => {
@@ -182,28 +181,29 @@ const Map = ({ photoHeader }) => {
     localStorage.setItem('total', countTotal);
     localStorage.setItem('isfound', plantFound);
     localStorage.setItem('contJardinPlante', countPlante);
+    localStorage.setItem('totalProce', countProce);
     allPlants.map((position) =>
-      position.distance <= 1300 &&
+      position.distance <= 2800 &&
       position.fields.nom_du_site === 'Jardin des Plantes'
         ? add(countPlante, setCountPlant)
         : '' ||
-          (position.distance <= 1300 &&
+          (position.distance <= 2800 &&
             position.fields.nom_du_site === 'Parc de Procé')
         ? add(countProce, setCountProce)
         : '' ||
-          (position.distance <= 1300 &&
+          (position.distance <= 2800 &&
             position.fields.nom_du_site === 'Parc floral de la Beaujoire')
         ? add(countBeaujoire, setCountBeaujoire)
         : '' ||
-          (position.distance <= 1300 &&
+          (position.distance <= 2800 &&
             position.fields.nom_du_site === 'Parc de la Gaudinière')
         ? add(countGaudinière, setCountGaudinière)
         : '' ||
-          (position.distance <= 1300 &&
+          (position.distance <= 2800 &&
             position.fields.nom_du_site === 'Parc exotique du Grand-Blottereau')
         ? add(countBlotereau, setCountBlotereau)
         : '' ||
-          (position.distance <= 1300 &&
+          (position.distance <= 2800 &&
             position.fields.nom_du_site === 'Arboretum Cimetière Parc')
         ? add(countCimetière, setCountCimetière)
         : ''
@@ -354,7 +354,7 @@ const Map = ({ photoHeader }) => {
                         <p>
                           {isFound.includes(plant.recordid)
                             ? 'Vous avez déjà cette plante'
-                            : plant.distance <= 1300
+                            : plant.distance <= 2800
                             ? `Vous êtes à ${plant.distance} mètres de ce magnolia vous pouvez le cueillir `
                             : `Vous êtes à ${plant.distance} mètres de ce magnolia`}
                         </p>
@@ -364,7 +364,7 @@ const Map = ({ photoHeader }) => {
                             onClick={(e) => counter(e)}
                             disabled={
                               !(
-                                plant.distance <= 1300 &&
+                                plant.distance <= 2800 &&
                                 !isFound.includes(plant.recordid)
                               )
                             }
