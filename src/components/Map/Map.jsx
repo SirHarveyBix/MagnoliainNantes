@@ -16,7 +16,8 @@ import Jplante from './img/parc1.png';
 import Proce from './img/parc2.png';
 import Beaujoire from './img/parc3.png';
 import Blotereau from './img/parc4.png';
-import Mark from './img/marker.png';
+import Mark from './img/fleur1.png';
+import Mark2 from './img/fleur2.png';
 import useGeoLocation from './useGeoLocation';
 import './Map.css';
 
@@ -29,7 +30,7 @@ const Map = ({ photoHeader }) => {
   const [parc, SetParc] = useState([]);
   const [parcfilter, setParcFilter] = useState([]);
   const [newParc, setNewParc] = useState([]);
-  const [countTotal, setCountTotal] = useState([]);
+  const [countTotal, setCountTotal] = useState(0);
   const [topPlant, SetTopPlant] = useState([]);
   const [showAll, setShowAll] = useState([]);
   const [countBeaujoire, setCountBeaujoire] = useState(0);
@@ -87,6 +88,18 @@ const Map = ({ photoHeader }) => {
   useEffect(() => {
     GetTopPlant();
   }, []);
+  useEffect(() => {
+    const contJardinPlant = localStorage.getItem('contJardinPlante');
+    const plantfound = localStorage.getItem('isfound');
+    const total = localStorage.getItem('total');
+    const totalPlante = localStorage.getItem('totalJplante');
+    if (contJardinPlant && plantfound && total && totalPlante) {
+      setCountPlant(parseInt(contJardinPlant) + 1);
+      setIsFound(plantfound);
+      setCountTotal(parseInt(total) + 1);
+      setCountPlant(parseInt(totalPlante) + 1);
+    }
+  }, []);
 
   // function to get distance beetween user and all plant
   function getDistance(origin, destination) {
@@ -112,7 +125,13 @@ const Map = ({ photoHeader }) => {
   // marker for plant
   const markerIcon = new L.Icon({
     iconUrl: Mark,
-    iconSize: [40, 40],
+    iconSize: [40, 70],
+    iconAnchor: [17, 50], // [left/right, top/bottom]
+    popupAnchor: [0, -50], // [left/right, top/bottom]
+  });
+  const markerIcon2 = new L.Icon({
+    iconUrl: Mark2,
+    iconSize: [40, 70],
     iconAnchor: [17, 50], // [left/right, top/bottom]
     popupAnchor: [0, -50], // [left/right, top/bottom]
   });
@@ -138,23 +157,35 @@ const Map = ({ photoHeader }) => {
     return plant;
   });
 
-  function add(cont, setCont, position) {
+  function add(cont, setCont) {
     const newcount = cont + 1;
-    position = true;
     setCont(newcount);
+    localStorage.setItem('totalJplante', countPlante);
   }
 
   const counter = (e) => {
+    e.preventDefault();
     console.log(e.target.id);
     const plantFound = isFound;
     plantFound.push(e.target.id);
     console.log(plantFound);
     setIsFound(plantFound);
+    setCountTotal(
+      countPlante +
+        countProce +
+        countBlotereau +
+        countCimetière +
+        countGaudinière +
+        countBeaujoire +
+        1
+    );
+    localStorage.setItem('total', countTotal);
     localStorage.setItem('isfound', plantFound);
+    localStorage.setItem('contJardinPlante', countPlante);
     allPlants.map((position) =>
       position.distance <= 1300 &&
       position.fields.nom_du_site === 'Jardin des Plantes'
-        ? add(countPlante, setCountPlant, position.isfound)
+        ? add(countPlante, setCountPlant)
         : '' ||
           (position.distance <= 1300 &&
             position.fields.nom_du_site === 'Parc de Procé')
@@ -178,6 +209,7 @@ const Map = ({ photoHeader }) => {
         : ''
     );
   };
+
   console.log(parc);
   console.log(allPlants);
   console.log(location);
@@ -192,6 +224,9 @@ const Map = ({ photoHeader }) => {
       <p className="avatarPosition">
         Votre position : latitude: {location.coordinates.lat}, longitude:
         {location.coordinates.lng}{' '}
+      </p>
+      <p>
+        Vous avez trouvé {countTotal} Magnolia sur {showAll.length}
       </p>
       <div className="BoxMap">
         {parcfilter &&
@@ -307,7 +342,11 @@ const Map = ({ photoHeader }) => {
                         plant.fields.location[0],
                         plant.fields.location[1],
                       ]}
-                      icon={markerIcon}
+                      icon={
+                        isFound.includes(plant.recordid)
+                          ? markerIcon2
+                          : markerIcon
+                      }
                       key={plant.recordid}
                     >
                       <Popup keepInView closeButton={false}>
