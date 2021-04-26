@@ -18,14 +18,51 @@ import HerbierSvg from './HerbierSvg';
 import PlansSvg from './PlansSvg';
 import MapProgress from '../mapProgress/MapProgress';
 
-const apiMap = {
-  name: 'Parc de Procé',
-  photo:
-    'https://domaine-de-sceaux.hauts-de-seine.fr/fileadmin/_processed_/5/2/csm_1-_plaine_orangerie_625d27e89a.jpg',
-  found: 10,
-  total: 52,
-};
-const { photo, name, found, total } = apiMap;
+const apiMap = [
+  {
+    name: 'Parc de Procé',
+    photo:
+      'https://domaine-de-sceaux.hauts-de-seine.fr/fileadmin/_processed_/5/2/csm_1-_plaine_orangerie_625d27e89a.jpg',
+    found: localStorage.getItem('totalProce'),
+    total: 10,
+  },
+  {
+    name: 'Parc de la Gaudinière',
+    photo:
+      'https://upload.wikimedia.org/wikipedia/commons/2/20/Nantes_-_Parc_Gaudiniere_%282%29.jpg',
+    found: 0,
+    total: 1,
+  },
+  {
+    name: 'Parc du Grand Blottereau',
+    photo:
+      'https://upload.wikimedia.org/wikipedia/commons/2/25/Nantes_GrandBlottereau_jangseungSucheon.jpg',
+    found: 0,
+    total: 3,
+  },
+  {
+    name: 'Jardin des Plantes',
+    photo:
+      'https://www.parcsetjardins.fr/data/cache/GardenPicture/picture/main/2/2/9384.1606317648.jpg',
+    found: localStorage.getItem('contJardinPlante'),
+    total: 3,
+  },
+  {
+    name: 'Parc Floral de la Beaujoire',
+    photo:
+      'https://www.sortir-en-ville.com/images/kcfinder/images/beaujoire-jdo-13-754-4.JPG',
+    found: 0,
+    total: 93,
+  },
+  {
+    name: 'Cimetière Parc',
+    photo:
+      'https://jardins.nantes.fr/N/Jardin/Parcs-jardins/Plus/433/Cimetiere-Parc/photo/IMGP6027-js.jpg',
+    found: 0,
+    total: 16,
+  },
+];
+
 function Nav({
   setPhotoHeader,
   setUsername,
@@ -101,12 +138,14 @@ function Nav({
           />
         </Route>
         <Route path="/mapProgress/">
-          <MapProgress
-            namePark={name}
-            imgPark={photo}
-            totalPlantPark={total}
-            plantFound={found}
-          />
+          {apiMap.map((parc) => (
+            <MapProgress
+              namePark={parc.name}
+              imgPark={parc.photo}
+              totalPlantPark={parc.total}
+              plantFound={parc.found}
+            />
+          ))}
         </Route>
 
         <Route path="/Map/">
