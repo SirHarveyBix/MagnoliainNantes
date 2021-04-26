@@ -11,7 +11,7 @@ import {
 import HomePage from '../homepage/Home';
 import HerbariumListo from '../Herbarium/HerbariumListo';
 import Map from '../Map/Map';
-
+import './Nav.css';
 import HomeSvg from './HomeSvg';
 import ProgressSvg from './ProgressSvg';
 import HerbierSvg from './HerbierSvg';

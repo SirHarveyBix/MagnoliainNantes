@@ -178,10 +178,7 @@ const Map = ({ photoHeader }) => {
         countBeaujoire +
         1
     );
-    localStorage.setItem('total', countTotal);
-    localStorage.setItem('isfound', plantFound);
-    localStorage.setItem('contJardinPlante', countPlante);
-    localStorage.setItem('totalProce', countProce);
+
     allPlants.map((position) =>
       position.distance <= 2800 &&
       position.fields.nom_du_site === 'Jardin des Plantes'
@@ -208,6 +205,10 @@ const Map = ({ photoHeader }) => {
         ? add(countCimetière, setCountCimetière)
         : ''
     );
+    localStorage.setItem('total', countTotal);
+    localStorage.setItem('isfound', plantFound);
+    localStorage.setItem('contJardinPlante', countPlante);
+    localStorage.setItem('totalProce', countProce);
   };
 
   console.log(parc);

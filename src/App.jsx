@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import Header from './components/Header/Header';
 import Nav from './components/Nav/Nav';
-import './components/Nav/Nav.css';
 
 function App() {
   const [photoHeader, setPhotoHeader] = useState(null);
