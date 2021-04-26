@@ -34,8 +34,8 @@ const Map = ({ photoHeader }) => {
   const [topPlant, SetTopPlant] = useState([]);
   const [showAll, setShowAll] = useState([]);
   const [countBeaujoire, setCountBeaujoire] = useState(0);
-  const [countCimetière, setCountCimetière] = useState(0);
-  const [countGaudinière, setCountGaudinière] = useState(0);
+  const [countCimetiere, setCountCimetiere] = useState(0);
+  const [countGaudiniere, setCountGaudiniere] = useState(0);
   const [countBlotereau, setCountBlotereau] = useState(0);
 
   const GetTopPlant = async () => {
@@ -90,14 +90,14 @@ const Map = ({ photoHeader }) => {
   }, []);
   useEffect(() => {
     const plantfound = localStorage.getItem('isfound');
-    const tot = localStorage.getItem('total');
-    const totPlante = localStorage.getItem('contJardinPlante');
-    const totProce = localStorage.getItem('totalProce');
-    if (plantfound && tot && (totPlante || totProce)) {
+    const total = localStorage.getItem('total');
+    const totalPlante = localStorage.getItem('contJardinPlante');
+    const totalProce = localStorage.getItem('totalProce');
+    if (plantfound && tot && (totalPlante || totalProce)) {
       setIsFound(plantfound);
-      setCountTotal(parseInt(tot) + 1);
-      setCountPlant(parseInt(totPlante) + 1);
-      setCountProce(parseInt(totProce) + 1);
+      setCountTotal(parseInt(total) + 1);
+      setCountPlant(parseInt(totalPlante) + 1);
+      setCountProce(parseInt(totalProce) + 1);
     }
   }, []);
 
@@ -129,7 +129,7 @@ const Map = ({ photoHeader }) => {
     iconAnchor: [17, 50], // [left/right, top/bottom]
     popupAnchor: [0, -50], // [left/right, top/bottom]
   });
-  const markerIcon2 = new L.Icon({
+  const markerIsFound = new L.Icon({
     iconUrl: Mark2,
     iconSize: [40, 70],
     iconAnchor: [17, 50], // [left/right, top/bottom]
@@ -173,8 +173,8 @@ const Map = ({ photoHeader }) => {
       countPlante +
         countProce +
         countBlotereau +
-        countCimetière +
-        countGaudinière +
+        countCimetiere +
+        countGaudiniere +
         countBeaujoire +
         1
     );
@@ -194,7 +194,7 @@ const Map = ({ photoHeader }) => {
         : '' ||
           (position.distance <= 2800 &&
             position.fields.nom_du_site === 'Parc de la Gaudinière')
-        ? add(countGaudinière, setCountGaudinière)
+        ? add(countGaudiniere, setCountGaudiniere)
         : '' ||
           (position.distance <= 2800 &&
             position.fields.nom_du_site === 'Parc exotique du Grand-Blottereau')
@@ -202,7 +202,7 @@ const Map = ({ photoHeader }) => {
         : '' ||
           (position.distance <= 2800 &&
             position.fields.nom_du_site === 'Arboretum Cimetière Parc')
-        ? add(countCimetière, setCountCimetière)
+        ? add(countCimetiere, setCountCimetiere)
         : ''
     );
     localStorage.setItem('total', countTotal);
@@ -249,12 +249,12 @@ const Map = ({ photoHeader }) => {
                         ? countBeaujoire
                         : '' ||
                           parc.fields.nom_complet === 'Parc de la Gaudinière'
-                        ? countGaudinière
+                        ? countGaudiniere
                         : '' ||
                           parc.fields.nom_complet === 'Parc du Grand Blottereau'
                         ? countBlotereau
                         : '' || parc.fields.nom_complet === 'Cimetière Parc'
-                        ? countCimetière
+                        ? countCimetiere
                         : ''}
                       /
                       {parc.fields.nom_complet === 'Parc de Procé'
@@ -345,7 +345,7 @@ const Map = ({ photoHeader }) => {
                       ]}
                       icon={
                         isFound.includes(plant.recordid)
-                          ? markerIcon2
+                          ? markerIsFound
                           : markerIcon
                       }
                       key={plant.recordid}
