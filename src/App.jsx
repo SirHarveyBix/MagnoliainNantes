@@ -11,7 +11,7 @@ function App() {
   const [magnoliaArray, setMagnoliaArray] = useState([]);
   const [showAll, setShowAll] = useState([magnoliaArray]);
 
-  const GetMagnolia = async () => {
+  const getMagnolia = async () => {
     const temp = await fetch(`https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_collection-vegetale-nantes&q=&rows=400&start=0&refine.genre=Magnolia
     `).then((res) => res.json());
     setMagnoliaArray(temp.records);
@@ -31,7 +31,7 @@ function App() {
   };
 
   useEffect(() => {
-    GetMagnolia();
+    getMagnolia();
   }, []);
   return (
     <div className="App">
@@ -57,7 +57,7 @@ function App() {
         setUser={setUser}
         setHomeActive={setHomeActive}
         homeActive={homeActive}
-        GetMagnolia={GetMagnolia}
+        getMagnolia={getMagnolia}
         showAll={showAll}
         setShowAll={setShowAll}
         magnoliaArray={magnoliaArray}
