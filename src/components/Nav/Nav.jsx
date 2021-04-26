@@ -35,7 +35,7 @@ function Nav({
   photoHeader,
   setHomeActive,
   showAll,
-  GetMagnolia,
+  getMagnolia,
   setShowAll,
   magnoliaArray,
   setMagnoliaArray,
@@ -92,7 +92,7 @@ function Nav({
       <Switch>
         <Route path="/Herbarium/">
           <HerbariumListo
-            GetMagnolia={GetMagnolia}
+            getMagnolia={getMagnolia}
             magnoliaArray={magnoliaArray}
             setMagnoliaArray={setMagnoliaArray}
             showAll={showAll}
@@ -111,7 +111,7 @@ function Nav({
 
         <Route path="/Map/">
           <Map
-            GetMagnolia={GetMagnolia}
+            getMagnolia={getMagnolia}
             magnoliaArray={magnoliaArray}
             setMagnoliaArray={setMagnoliaArray}
             showAll={showAll}
