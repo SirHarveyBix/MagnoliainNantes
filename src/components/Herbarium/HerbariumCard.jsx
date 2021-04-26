@@ -6,14 +6,7 @@ import checkGreen from './checkGreen.png';
 import checkBlack from './checkBlack.png';
 import './HerbariumCard.css';
 
-const magnolia = {
-  image:
-    'https://www.meillandrichardier.com/media/catalog/product/cache/1/image/800x800/040ec09b1e35df139433887a97daa66f/8/0/8072a-magnolia_susan.jpg',
-  gender: 'Magnolia des tropiques ',
-  location: 'Parc de la Chanterie',
-};
-
-function HerbariumCard() {
+function HerbariumCard({ plant }) {
   const [logoCheck, setLogoCheck] = useState(checkBlack);
   const [acquisition, setAcquisition] = useState(false);
 
@@ -25,23 +18,24 @@ function HerbariumCard() {
       setLogoCheck(checkBlack);
     }
   }
+
   return (
     <div className="cardsHerbarium">
       <div className="imageCard">
         <img
-          src={magnolia.image}
-          alt="photoMagnolia"
+          src={`https://data.nantesmetropole.fr/explore/dataset/244400404_collection-vegetale-nantes/files/${plant.fields.photo1.id}/300/`}
+          alt="plant"
           className="photoMagnolia"
         />
       </div>
       <div className="infoCard">
         <div className="gender">
           <h3 className="title">Espèce</h3>
-          <p className="content">{magnolia.gender}</p>
+          <p className="content">{plant.fields.espece}</p>
         </div>
         <div className="location">
-          <h3 className="title">Localisation</h3>
-          <p className="content">{magnolia.location}</p>
+          <h3 className="title">Cultivar</h3>
+          <p className="content">{plant.fields.cultivar}</p>
           <img
             src={logoCheck}
             alt="toggleImg"

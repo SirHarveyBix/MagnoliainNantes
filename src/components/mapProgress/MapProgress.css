@@ -1,0 +1,53 @@
+
+.MapProgress{
+  margin: 10px 10px 10px 10px;
+  display: flex;
+  max-height: 150px;
+  max-width: 394px;
+  border: solid black 1px;
+  border-radius: 8px;
+  background-color: #FFFFFF;
+  box-shadow: 0px 4px rgba(0, 0, 0, 0.25);
+
+}
+.divPhotoPark{
+  width: 25%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.photoPark{
+  width: 55px;
+  height: 55px;
+  margin: auto 0;
+  border-radius: 50px;
+}
+.count{
+  display: flex;
+  align-items: center;
+}
+
+.info{
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+.totalPlant{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+.logoplant{
+  width: 1em;
+  height: 1em;
+}
+
+p{
+  font-size: 0.7em;
+}
+.ProgressBar{
+margin: 0.5em;
+}

@@ -9,15 +9,23 @@ import {
   NavLink,
 } from 'react-router-dom';
 import HomePage from '../homepage/Home';
-import HerbariumCard from '../Herbarium/HerbariumCard';
+import HerbariumListo from '../Herbarium/HerbariumListo';
 import Map from '../Map/Map';
-
+import './Nav.css';
 import HomeSvg from './HomeSvg';
 import ProgressSvg from './ProgressSvg';
 import HerbierSvg from './HerbierSvg';
 import PlansSvg from './PlansSvg';
+import MapProgress from '../mapProgress/MapProgress';
 
-
+const apiMap = {
+  name: 'Parc de Procé',
+  photo:
+    'https://domaine-de-sceaux.hauts-de-seine.fr/fileadmin/_processed_/5/2/csm_1-_plaine_orangerie_625d27e89a.jpg',
+  found: 10,
+  total: 52,
+};
+const { photo, name, found, total } = apiMap;
 function Nav({
   setPhotoHeader,
   setUsername,
@@ -26,60 +34,14 @@ function Nav({
   setUser,
   photoHeader,
   setHomeActive,
-  checkAcquis,
-  logoCheck,
+  showAll,
+  getMagnolia,
+  setShowAll,
+  magnoliaArray,
+  setMagnoliaArray,
 }) {
   return (
     <Router>
-
-      <div>
-        <div className="footer nav">
-          <div className="boxIcon">
-            <NavLink
-              exact
-              to="/"
-              className="main-nav"
-              activeClassName="main-nav-active"
-            >
-              <img src={Home} alt="home" onClick={() => setHomeActive(false)} />
-            </NavLink>
-            <p>Home</p>
-          </div>
-          <div className="boxIcon">
-            <img
-              src={Progress}
-              alt="progress"
-              onClick={() => setHomeActive(true)}
-            />
-
-            <p>Progres</p>
-          </div>
-          <div className="boxIcon">
-            <NavLink
-              exact
-              to="/Herbarium/"
-              className="main-nav"
-              activeClassName="main-nav-active"
-            >
-              <img
-                src={Herbier}
-                alt="herbier"
-                onClick={() => setHomeActive(true)}
-                className="svg"
-              />
-            </NavLink>
-            <p>Herbarium</p>
-          </div>
-          <div className="boxIcon">
-            <NavLink
-              exact
-              to="/Map/"
-              className="main-nav"
-              activeClassName="main-nav-active"
-            >
-              <img src={Plan} alt="plan" onClick={() => setHomeActive(true)} />
-            </NavLink>
-
       <nav className="footer">
         <div className="boxIcon">
           <NavLink
@@ -95,11 +57,11 @@ function Nav({
         <div className="boxIcon">
           <NavLink
             exact
-            to="/"
+            to="/mapProgress/"
             className="main-nav"
             activeClassName="main-nav-active"
           >
-            <ProgressSvg fill="white" onClick={() => setHomeActive(false)} />
+            <ProgressSvg fill="white" onClick={() => setHomeActive(true)} />
             <p>Progrès</p>
           </NavLink>
         </div>
@@ -110,46 +72,52 @@ function Nav({
             className="main-nav"
             activeClassName="main-nav-active"
           >
-            <HerbierSvg fill="white" onClick={() => setHomeActive(false)} />
+            <HerbierSvg fill="white" onClick={() => setHomeActive(true)} />
             <p>Herbier</p>
           </NavLink>
         </div>
         <div className="boxIcon">
           <NavLink
             exact
-            to="/"
+            to="/Map/"
             className="main-nav"
             activeClassName="main-nav-active"
           >
-            <PlansSvg fill="white" onClick={() => setHomeActive(false)} />
-
+            <PlansSvg fill="white" onClick={() => setHomeActive(true)} />
             <p>Plans</p>
           </NavLink>
         </div>
       </nav>
 
-        <Switch>
-          <Route path="/Herbarium/">
-            <HerbariumCard checkAcquis={checkAcquis} logoCheck={logoCheck} />
-          </Route>
-          <Route path="/Map/">
-            <Map photoHeader={photoHeader} />
-          </Route>
-          <Route path="/">
-            <HomePage
-              photoHeader={photoHeader}
-              setPhotoHeader={setPhotoHeader}
-              username={username}
-              setUsername={setUsername}
-              user={user}
-              setUser={setUser}
-            />
-          </Route>
-        </Switch>
-      </div>
       <Switch>
         <Route path="/Herbarium/">
-          <HerbariumCard checkAcquis={checkAcquis} logoCheck={logoCheck} />
+          <HerbariumListo
+            getMagnolia={getMagnolia}
+            magnoliaArray={magnoliaArray}
+            setMagnoliaArray={setMagnoliaArray}
+            showAll={showAll}
+            setShowAll={setShowAll}
+            photoHeader={photoHeader}
+          />
+        </Route>
+        <Route path="/mapProgress/">
+          <MapProgress
+            namePark={name}
+            imgPark={photo}
+            totalPlantPark={total}
+            plantFound={found}
+          />
+        </Route>
+
+        <Route path="/Map/">
+          <Map
+            getMagnolia={getMagnolia}
+            magnoliaArray={magnoliaArray}
+            setMagnoliaArray={setMagnoliaArray}
+            showAll={showAll}
+            setShowAll={setShowAll}
+            photoHeader={photoHeader}
+          />
         </Route>
         <Route path="/">
           <HomePage
