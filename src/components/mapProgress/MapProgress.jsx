@@ -19,7 +19,7 @@ function MapProgress({ namePark, imgPark, totalPlantPark, plantFound }) {
             </p>
           </div>
           <div className="ProgressBar">
-            <ProgressBar largeur={200} progress={plantFound / totalPlantPark} />
+            <ProgressBar width={200} progress={plantFound / totalPlantPark} />
           </div>
         </div>
       </div>

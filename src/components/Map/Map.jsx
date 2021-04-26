@@ -16,7 +16,8 @@ import Jplante from './img/parc1.png';
 import Proce from './img/parc2.png';
 import Beaujoire from './img/parc3.png';
 import Blotereau from './img/parc4.png';
-import Mark from './img/marker.png';
+import Mark from './img/fleur1.png';
+import Mark2 from './img/fleur2.png';
 import useGeoLocation from './useGeoLocation';
 import './Map.css';
 
@@ -27,14 +28,20 @@ const Map = ({ photoHeader }) => {
   const [countProce, setCountProce] = useState(0);
   const [isFound, setIsFound] = useState([]);
   const [parc, SetParc] = useState([]);
-  const [parcfilter, setParcFilter] = useState(parc);
-  const [countTotal, setCountTotal] = useState([]);
+  const [parcfilter, setParcFilter] = useState([]);
+  const [newParc, setNewParc] = useState([]);
+  const [countTotal, setCountTotal] = useState(0);
   const [topPlant, SetTopPlant] = useState([]);
   const [showAll, setShowAll] = useState([]);
+  const [countBeaujoire, setCountBeaujoire] = useState(0);
+  const [countCimetiere, setCountCimetiere] = useState(0);
+  const [countGaudiniere, setCountGaudiniere] = useState(0);
+  const [countBlotereau, setCountBlotereau] = useState(0);
 
   const GetTopPlant = async () => {
     const temp = await fetch(`https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_collection-vegetale-nantes&q=&rows=400&start=0&refine.genre=Magnolia
     `).then((res) => res.json());
+
     SetTopPlant(temp.records);
     setShowAll(
       temp.records.filter(
@@ -47,29 +54,53 @@ const Map = ({ photoHeader }) => {
       )
     );
   };
+
   const GetParc = async () => {
     const tempo = await fetch(`https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_parcs-jardins-nantes&q=&rows=100
       `).then((res) => res.json());
     SetParc(tempo.records);
+    const newarray = {
+      fields: {
+        nom_complet: 'Cimetière Parc',
+        adresse: 'Chemin de la justice',
+        location: [47.269653, -1.584945],
+      },
+    };
 
     setParcFilter(
-      tempo.records.filter(
-        (valeur) =>
-          valeur.fields.nom_complet === 'Parc de Procé' ||
-          valeur.fields.nom_complet === 'Parc Floral de la Beaujoire' ||
-          valeur.fields.nom_complet === 'Cimetière Parc Paysager' ||
-          valeur.fields.nom_complet === 'Jardin des Plantes' ||
-          valeur.fields.nom_complet === 'Parc du Grand Blottereau' ||
-          valeur.fields.nom_complet === 'Parc de la Gaudinière'
-      )
+      tempo.records
+        .concat(newarray)
+        .filter(
+          (valeur) =>
+            valeur.fields.nom_complet === 'Parc de Procé' ||
+            valeur.fields.nom_complet === 'Parc Floral de la Beaujoire' ||
+            valeur.fields.nom_complet === 'Jardin des Plantes' ||
+            valeur.fields.nom_complet === 'Parc du Grand Blottereau' ||
+            valeur.fields.nom_complet === 'Parc de la Gaudinière' ||
+            valeur.fields.nom_complet === 'Cimetière Parc'
+        )
     );
   };
+
   useEffect(() => {
     GetParc();
   }, []);
   useEffect(() => {
     GetTopPlant();
   }, []);
+  useEffect(() => {
+    const plantfound = localStorage.getItem('isfound');
+    const total = localStorage.getItem('total');
+    const totalPlante = localStorage.getItem('contJardinPlante');
+    const totalProce = localStorage.getItem('totalProce');
+    if (plantfound && total && (totalPlante || totalProce)) {
+      setIsFound(plantfound);
+      setCountTotal(parseInt(total) + 1);
+      setCountPlant(parseInt(totalPlante) + 1);
+      setCountProce(parseInt(totalProce) + 1);
+    }
+  }, []);
+
   // function to get distance beetween user and all plant
   function getDistance(origin, destination) {
     // return distance in meters
@@ -94,7 +125,13 @@ const Map = ({ photoHeader }) => {
   // marker for plant
   const markerIcon = new L.Icon({
     iconUrl: Mark,
-    iconSize: [40, 40],
+    iconSize: [40, 70],
+    iconAnchor: [17, 50], // [left/right, top/bottom]
+    popupAnchor: [0, -50], // [left/right, top/bottom]
+  });
+  const markerIsFound = new L.Icon({
+    iconUrl: Mark2,
+    iconSize: [40, 70],
     iconAnchor: [17, 50], // [left/right, top/bottom]
     popupAnchor: [0, -50], // [left/right, top/bottom]
   });
@@ -116,7 +153,7 @@ const Map = ({ photoHeader }) => {
       location.coordinates.lng,
     ]);
     plant.distance = parseInt(distance.toFixed(0));
-    plant.isFound = false;
+    plant.isfound = false;
     return plant;
   });
 
@@ -126,33 +163,71 @@ const Map = ({ photoHeader }) => {
   }
 
   const counter = (e) => {
+    e.preventDefault();
     console.log(e.target.id);
     const plantFound = isFound;
     plantFound.push(e.target.id);
     console.log(plantFound);
     setIsFound(plantFound);
+    setCountTotal(
+      countPlante +
+        countProce +
+        countBlotereau +
+        countCimetiere +
+        countGaudiniere +
+        countBeaujoire +
+        1
+    );
+
     allPlants.map((position) =>
+      position.distance <= 2800 &&
       position.fields.nom_du_site === 'Jardin des Plantes'
         ? add(countPlante, setCountPlant)
         : '' ||
-          (position.distance <= 1300 &&
+          (position.distance <= 2800 &&
             position.fields.nom_du_site === 'Parc de Procé')
         ? add(countProce, setCountProce)
+        : '' ||
+          (position.distance <= 2800 &&
+            position.fields.nom_du_site === 'Parc floral de la Beaujoire')
+        ? add(countBeaujoire, setCountBeaujoire)
+        : '' ||
+          (position.distance <= 2800 &&
+            position.fields.nom_du_site === 'Parc de la Gaudinière')
+        ? add(countGaudiniere, setCountGaudiniere)
+        : '' ||
+          (position.distance <= 2800 &&
+            position.fields.nom_du_site === 'Parc exotique du Grand-Blottereau')
+        ? add(countBlotereau, setCountBlotereau)
+        : '' ||
+          (position.distance <= 2800 &&
+            position.fields.nom_du_site === 'Arboretum Cimetière Parc')
+        ? add(countCimetiere, setCountCimetiere)
         : ''
     );
+    localStorage.setItem('total', countTotal);
+    localStorage.setItem('isfound', plantFound);
+    localStorage.setItem('contJardinPlante', countPlante);
+    localStorage.setItem('totalProce', countProce);
   };
 
+  console.log(parc);
   console.log(allPlants);
   console.log(location);
   console.log(parcfilter);
   console.log(topPlant);
   console.log(showAll);
+  console.log(countGaudiniere);
+  console.log(countPlante);
 
   return (
     <div>
       <p className="avatarPosition">
         Votre position : latitude: {location.coordinates.lat}, longitude:
         {location.coordinates.lng}{' '}
+      </p>
+      <p>
+        Vous avez trouvé {countTotal} Magnolia sur {showAll.length}
       </p>
       <div className="BoxMap">
         {parcfilter &&
@@ -168,6 +243,18 @@ const Map = ({ photoHeader }) => {
                         ? countPlante
                         : '' || parc.fields.nom_complet === 'Parc de Procé'
                         ? countProce
+                        : '' ||
+                          parc.fields.nom_complet ===
+                            'Parc Floral de la Beaujoire'
+                        ? countBeaujoire
+                        : '' ||
+                          parc.fields.nom_complet === 'Parc de la Gaudinière'
+                        ? countGaudiniere
+                        : '' ||
+                          parc.fields.nom_complet === 'Parc du Grand Blottereau'
+                        ? countBlotereau
+                        : '' || parc.fields.nom_complet === 'Cimetière Parc'
+                        ? countCimetiere
                         : ''}
                       /
                       {parc.fields.nom_complet === 'Parc de Procé'
@@ -202,6 +289,12 @@ const Map = ({ photoHeader }) => {
                               total.fields.nom_du_site ===
                               'Parc exotique du Grand-Blottereau'
                           ).length
+                        : '' || parc.fields.nom_complet === 'Cimetière Parc'
+                        ? showAll.filter(
+                            (total) =>
+                              total.fields.nom_du_site ===
+                              'Arboretum Cimetière Parc'
+                          ).length
                         : ''}
                     </p>
                   </div>
@@ -222,6 +315,8 @@ const Map = ({ photoHeader }) => {
                       : '' ||
                         parc.fields.nom_complet === 'Parc de la Gaudinière'
                       ? Proce
+                      : '' || parc.fields.nom_complet === 'Cimetière Parc'
+                      ? Jplante
                       : ''
                   }
                   className="imgParc"
@@ -248,13 +343,19 @@ const Map = ({ photoHeader }) => {
                         plant.fields.location[0],
                         plant.fields.location[1],
                       ]}
-                      icon={markerIcon}
+                      icon={
+                        isFound.includes(plant.recordid)
+                          ? markerIsFound
+                          : markerIcon
+                      }
                       key={plant.recordid}
                     >
                       <Popup keepInView closeButton={false}>
                         Espèce : {plant.fields.espece}
                         <p>
-                          {plant.distance <= 1300
+                          {isFound.includes(plant.recordid)
+                            ? 'Vous avez déjà cette plante'
+                            : plant.distance <= 2800
                             ? `Vous êtes à ${plant.distance} mètres de ce magnolia vous pouvez le cueillir `
                             : `Vous êtes à ${plant.distance} mètres de ce magnolia`}
                         </p>
@@ -264,7 +365,7 @@ const Map = ({ photoHeader }) => {
                             onClick={(e) => counter(e)}
                             disabled={
                               !(
-                                plant.distance <= 1400 &&
+                                plant.distance <= 2800 &&
                                 !isFound.includes(plant.recordid)
                               )
                             }
