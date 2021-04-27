@@ -49,7 +49,7 @@ const apiMap = [
 const PageProgress = () => {
   return (
     <div className="page-progress">
-      <h2 className="progress-title">Progression par Parcs :</h2>
+      <h2 className="progress-title">Progression par parcs :</h2>
       {apiMap.map((parc) => (
         <MapProgress
           namePark={parc.name}
