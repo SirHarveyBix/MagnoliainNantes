@@ -1,3 +1,4 @@
+/* eslint-disable object-shorthand */
 import * as React from 'react';
 import './ProgressBar.css';
 
