@@ -6,7 +6,6 @@ import './MapProgress.css';
 function MapProgress({ namePark, imgPark, totalPlantPark, plantFound }) {
   return (
     <div className="MapProgress">
-      <h2>Progression par Parcs :</h2>
       <div className="divPhotoPark">
         <img className="photoPark" src={imgPark} alt="photoPark" />
       </div>
