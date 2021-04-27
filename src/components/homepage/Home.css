@@ -19,14 +19,14 @@
   font-size: 22px;
 }
 .home-section-profil input {
-  margin-top: 28px;
+  margin-top: 34px;
   border: none;
   border-bottom: 1px solid black;
   outline: none;
   font-size: 16px;
 }
 .home-section-avatar {
-  margin: 56px 16px 0 24px;
+  margin: 48px 16px 0 24px;
 }
 .home-section-avatar h2 {
   font-size: 22px;
@@ -40,7 +40,7 @@
 .home-section-avatar img {
   height: 80px;
   width: 80px;
-  margin: 0 15px 28px 15px;
+  margin: 15px 22px;
   border-radius: 100px;
   background-color: #65c9ff;
 }
