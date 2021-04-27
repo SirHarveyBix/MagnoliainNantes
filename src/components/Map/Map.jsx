@@ -18,7 +18,7 @@ import Beaujoire from './img/parc3.png';
 import Blotereau from './img/parc4.png';
 import Cimetier from './img/parc5.jpg';
 import Gaudiniere from './img/parc6.jpg';
-import magno from './img/magno.png';
+import magno from './img/dqdq.png';
 import Mark from './img/fleur1.png';
 import Mark2 from './img/fleur2.png';
 import useGeoLocation from './useGeoLocation';
@@ -100,17 +100,9 @@ const Map = ({ photoHeader }) => {
     const totalCimetiere = localStorage.getItem('totalCimetiere');
     const totalBlotereau = localStorage.getItem('totalBlotereau');
     const totalGaudiniere = localStorage.getItem('totalGaudiniere');
-    if (
-      plantfound &&
-      total &&
-      (totalPlante ||
-        totalProce ||
-        totalBeaujoire ||
-        totalBlotereau ||
-        totalCimetiere ||
-        totalGaudiniere)
-    ) {
-      setIsFound(plantfound);
+    console.log(JSON.parse(plantfound));
+    if (plantfound && total) {
+      setIsFound(JSON.parse(plantfound));
       setCountTotal(parseInt(total));
       setCountPlant(parseInt(totalPlante));
       setCountProce(parseInt(totalProce));
@@ -180,12 +172,11 @@ const Map = ({ photoHeader }) => {
 
   const counter = (e) => {
     e.preventDefault();
-    console.log(e.target.id);
     const plantFound = isFound;
     plantFound.push(e.target.id);
     console.log(plantFound);
     setIsFound(plantFound);
-    localStorage.setItem('isfound', plantFound);
+    localStorage.setItem('isfound', JSON.stringify(plantFound));
     setCountTotal(
       countPlante +
         countProce +
@@ -386,14 +377,7 @@ const Map = ({ photoHeader }) => {
                     </p>
                   </div>
                 </div>
-                <div
-                  className="scoreMagno"
-                  style={{
-                    backgroundImage: `url(${Proce})`,
-                  }}
-                >
-                  {countTotal} Magnolia sur {showAll.length}
-                </div>
+                <div className="scoreMagno" />
               </div>
               <MapContainer
                 center={[parc.fields.location[0], parc.fields.location[1]]}

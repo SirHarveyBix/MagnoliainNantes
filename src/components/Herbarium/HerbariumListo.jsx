@@ -15,7 +15,7 @@ function HerbariumListo({ magnoliaArray, showAll, setShowAll, getMagnolia }) {
 
   const filtered = magnoliaArray.filter(
     (valeur) =>
-      plantFound !== undefined ? plantFound.includes(valeur.recordid) : ''
+      plantFound !== null ? plantFound.includes(valeur.recordid) : ''
     /* valeur.fields.photo1 !== undefined &&
       valeur.fields.nom_du_site === 'Arboretum Cimetière Parc' */
   );

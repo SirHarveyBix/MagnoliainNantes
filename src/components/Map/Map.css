@@ -52,8 +52,10 @@
   margin-right: 10px;
 }
 .scoreMagno {
-  width: 100%;
-  height: auto;
+  width: 100px;
+  height: 100px;
+  z-index: 100000;
+  background-image: url('./img/dqdq.png');
 }
 .imgPopup {
   width: 100px;
