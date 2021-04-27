@@ -1,3 +1,29 @@
+.BoxHerbarium {
+  font-family: 'Inter', sans-serif;
+}
+
+.herbier-title {
+  font-size: 22px;
+  margin: 0 0 28px 24px;
+}
+.herbier-btn {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 24px;
+}
+
+.herbier-btn-magnolia {
+  margin-left: 10px;
+  padding: 4px 10px;
+  font-size: 10px;
+  background-color: #fff;
+  color: #53d496;
+  border: 1px solid #53d496;
+  border-radius: 6px;
+  outline: none;
+  cursor: pointer;
+}
+
 .cardsHerbarium {
   position: relative;
   font-family: 'Inter', sans-serif;
