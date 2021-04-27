@@ -25,7 +25,9 @@
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  background-color: #53d496;
+  color: white;
+  height: 100px;
+  background-size: cover;
 }
 .imgParc {
   width: 80px;
@@ -49,6 +51,10 @@
 .CardInfoSubTxt p {
   margin-right: 10px;
 }
+.scoreMagno {
+  width: 100%;
+  height: auto;
+}
 .imgPopup {
   width: 100px;
   height: auto;
@@ -66,6 +72,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
+  z-index: 100000;
 }
 .leaflet-container {
   width: 100%;
@@ -87,11 +94,10 @@
 .avatarLocation {
   border-radius: 100px;
 }
-.avatarPosition {
-  border: thick double green;
-  border-radius: 10px;
+.avatarInformation {
   padding: 10px;
-  margin: 5px;
+  font-size: 1.5em;
+  font-family: 'Inter', sans-serif;
 }
 
 .avatar {

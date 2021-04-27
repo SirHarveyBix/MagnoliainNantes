@@ -13,9 +13,12 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
 import Jplante from './img/parc1.png';
-import Proce from './img/parc2.png';
+import Proce from './img/parc7.jpg';
 import Beaujoire from './img/parc3.png';
 import Blotereau from './img/parc4.png';
+import Cimetier from './img/parc5.jpg';
+import Gaudiniere from './img/parc6.jpg';
+import magno from './img/magno.png';
 import Mark from './img/fleur1.png';
 import Mark2 from './img/fleur2.png';
 import useGeoLocation from './useGeoLocation';
@@ -91,13 +94,30 @@ const Map = ({ photoHeader }) => {
   useEffect(() => {
     const plantfound = localStorage.getItem('isfound');
     const total = localStorage.getItem('total');
-    const totalPlante = localStorage.getItem('contJardinPlante');
+    const totalPlante = localStorage.getItem('totalJardinPlante');
     const totalProce = localStorage.getItem('totalProce');
-    if (plantfound && tot && (totalPlante || totalProce)) {
+    const totalBeaujoire = localStorage.getItem('totalBeaujoire');
+    const totalCimetiere = localStorage.getItem('totalCimetiere');
+    const totalBlotereau = localStorage.getItem('totalBlotereau');
+    const totalGaudiniere = localStorage.getItem('totalGaudiniere');
+    if (
+      plantfound &&
+      total &&
+      (totalPlante ||
+        totalProce ||
+        totalBeaujoire ||
+        totalBlotereau ||
+        totalCimetiere ||
+        totalGaudiniere)
+    ) {
       setIsFound(plantfound);
-      setCountTotal(parseInt(total) + 1);
-      setCountPlant(parseInt(totalPlante) + 1);
-      setCountProce(parseInt(totalProce) + 1);
+      setCountTotal(parseInt(total));
+      setCountPlant(parseInt(totalPlante));
+      setCountProce(parseInt(totalProce));
+      setCountBeaujoire(parseInt(totalBeaujoire));
+      setCountBlotereau(parseInt(totalBlotereau));
+      setCountGaudiniere(parseInt(totalGaudiniere));
+      setCountCimetiere(parseInt(totalCimetiere));
     }
   }, []);
 
@@ -143,6 +163,7 @@ const Map = ({ photoHeader }) => {
     iconAnchor: [17, 50], // [left/right, top/bottom]
     popupAnchor: [0, -50], // [left/right, top/bottom]
   });
+
   // get user position
   const location = useGeoLocation();
 
@@ -157,11 +178,6 @@ const Map = ({ photoHeader }) => {
     return plant;
   });
 
-  function add(cont, setCont) {
-    const newcount = cont + 1;
-    setCont(newcount);
-  }
-
   const counter = (e) => {
     e.preventDefault();
     console.log(e.target.id);
@@ -169,6 +185,7 @@ const Map = ({ photoHeader }) => {
     plantFound.push(e.target.id);
     console.log(plantFound);
     setIsFound(plantFound);
+    localStorage.setItem('isfound', plantFound);
     setCountTotal(
       countPlante +
         countProce +
@@ -205,11 +222,65 @@ const Map = ({ photoHeader }) => {
         ? add(countCimetiere, setCountCimetiere)
         : ''
     );
-    localStorage.setItem('total', countTotal);
-    localStorage.setItem('isfound', plantFound);
-    localStorage.setItem('contJardinPlante', countPlante);
-    localStorage.setItem('totalProce', countProce);
   };
+
+  function add(cont, setCont) {
+    const newcount = cont + 1;
+    setCont(newcount);
+    localStorage.setItem('total', countTotal + 1);
+    switch (setCont) {
+      case setCountPlant:
+        localStorage.setItem('totalJardinPlante', countPlante + 1);
+        localStorage.setItem('totalGaudiniere', countGaudiniere);
+        localStorage.setItem('totalCimetiere', countCimetiere);
+        localStorage.setItem('totalBlotereau', countBlotereau);
+        localStorage.setItem('totalBeaujoire', countBeaujoire);
+        localStorage.setItem('totalProce', countProce);
+        break;
+      case setCountProce:
+        localStorage.setItem('totalProce', countProce + 1);
+        localStorage.setItem('totalJardinPlante', countPlante);
+        localStorage.setItem('totalGaudiniere', countGaudiniere);
+        localStorage.setItem('totalCimetiere', countCimetiere);
+        localStorage.setItem('totalBlotereau', countBlotereau);
+        localStorage.setItem('totalBeaujoire', countBeaujoire);
+        break;
+      case setCountBeaujoire:
+        localStorage.setItem('totalProce', countProce);
+        localStorage.setItem('totalJardinPlante', countPlante);
+        localStorage.setItem('totalGaudiniere', countGaudiniere);
+        localStorage.setItem('totalCimetiere', countCimetiere);
+        localStorage.setItem('totalBlotereau', countBlotereau);
+        localStorage.setItem('totalBeaujoire', countBeaujoire + 1);
+        break;
+      case setCountBlotereau:
+        localStorage.setItem('totalProce', countProce);
+        localStorage.setItem('totalJardinPlante', countPlante);
+        localStorage.setItem('totalGaudiniere', countGaudiniere);
+        localStorage.setItem('totalCimetiere', countCimetiere);
+        localStorage.setItem('totalBlotereau', countBlotereau + 1);
+        localStorage.setItem('totalBeaujoire', countBeaujoire);
+        break;
+      case setCountCimetiere:
+        localStorage.setItem('totalProce', countProce);
+        localStorage.setItem('totalJardinPlante', countPlante);
+        localStorage.setItem('totalGaudiniere', countGaudiniere);
+        localStorage.setItem('totalCimetiere', countCimetiere + 1);
+        localStorage.setItem('totalBlotereau', countBlotereau);
+        localStorage.setItem('totalBeaujoire', countBeaujoire);
+        break;
+      case setCountGaudiniere:
+        localStorage.setItem('totalProce', countProce);
+        localStorage.setItem('totalJardinPlante', countPlante);
+        localStorage.setItem('totalGaudiniere', countGaudiniere + 1);
+        localStorage.setItem('totalCimetiere', countCimetiere);
+        localStorage.setItem('totalBlotereau', countBlotereau);
+        localStorage.setItem('totalBeaujoire', countBeaujoire);
+        break;
+      default:
+        console.log('rein');
+    }
+  }
 
   console.log(parc);
   console.log(allPlants);
@@ -217,23 +288,39 @@ const Map = ({ photoHeader }) => {
   console.log(parcfilter);
   console.log(topPlant);
   console.log(showAll);
-  console.log(countGaudinière);
+  console.log(countGaudiniere);
   console.log(countPlante);
 
   return (
     <div>
-      <p className="avatarPosition">
-        Votre position : latitude: {location.coordinates.lat}, longitude:
-        {location.coordinates.lng}{' '}
-      </p>
-      <p>
-        Vous avez trouvé {countTotal} Magnolia sur {showAll.length}
-      </p>
       <div className="BoxMap">
         {parcfilter &&
           parcfilter.map((parc) => (
             <div className="CardMap">
-              <div className="CardInfo">
+              <div
+                className="CardInfo"
+                style={{
+                  backgroundImage: `url( ${
+                    parc.fields.nom_complet === 'Jardin des Plantes'
+                      ? Jplante
+                      : '' ||
+                        parc.fields.nom_complet ===
+                          'Parc Floral de la Beaujoire'
+                      ? Beaujoire
+                      : '' ||
+                        parc.fields.nom_complet === 'Parc du Grand Blottereau'
+                      ? Blotereau
+                      : '' || parc.fields.nom_complet === 'Cimetière Parc'
+                      ? Cimetier
+                      : '' ||
+                        parc.fields.nom_complet === 'Parc de la Gaudinière'
+                      ? Gaudiniere
+                      : '' || parc.fields.nom_complet === 'Parc de Procé'
+                      ? Proce
+                      : ''
+                  })`,
+                }}
+              >
                 <div className="CardInfoTxt">
                   <h3>{parc.fields.nom_complet}</h3>
                   <div className="CardInfoSubTxt">
@@ -299,31 +386,15 @@ const Map = ({ photoHeader }) => {
                     </p>
                   </div>
                 </div>
-                <img
-                  src={
-                    parc.fields.nom_complet === 'Parc de Procé'
-                      ? Proce
-                      : '' || parc.fields.nom_complet === 'Jardin des Plantes'
-                      ? Jplante
-                      : '' ||
-                        parc.fields.nom_complet ===
-                          'Parc Floral de la Beaujoire'
-                      ? Beaujoire
-                      : '' ||
-                        parc.fields.nom_complet === 'Parc du Grand Blottereau'
-                      ? Blotereau
-                      : '' ||
-                        parc.fields.nom_complet === 'Parc de la Gaudinière'
-                      ? Proce
-                      : '' || parc.fields.nom_complet === 'Cimetière Parc'
-                      ? Jplante
-                      : ''
-                  }
-                  className="imgParc"
-                  alt="imageparc"
-                />
+                <div
+                  className="scoreMagno"
+                  style={{
+                    backgroundImage: `url(${Proce})`,
+                  }}
+                >
+                  {countTotal} Magnolia sur {showAll.length}
+                </div>
               </div>
-
               <MapContainer
                 center={[parc.fields.location[0], parc.fields.location[1]]}
                 zoom={13}
