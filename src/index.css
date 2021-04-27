@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
+#root {
+  overflow: hidden;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -150,7 +154,4 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-}
-#root {
-  overflow: hidden;
 }

@@ -1,9 +1,10 @@
 .BoxHerbarium {
   font-family: 'Inter', sans-serif;
+  background-color: rgb(224 210 187 / 15%);
 }
 
 .herbier-title {
-  font-size: 22px;
+  font-size: 1.7rem;
   margin: 0 0 28px 24px;
 }
 .herbier-btn {
@@ -26,52 +27,46 @@
 
 .cardsHerbarium {
   position: relative;
-  font-family: 'Inter', sans-serif;
   display: flex;
-  justify-content: space-between;
-  height: 160px;
   border-radius: 5px;
-  margin: 0% 3%;
-  margin-top: 20px;
-  box-shadow: 1px 1px 1px 2px rgba(0, 0, 0, 0.1);
-  background-color: #fafafa;
+  margin: 20px 24px 0 24px;
+  background-color: #fff;
+  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
+    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
-.imageCard {
-  width: 95px;
-  height: 150px;
-  margin-left: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
+
 .photoMagnolia {
-  max-width: 140px;
+  width: 130px;
   height: 130px;
-  border-radius: 15px;
+  margin: 14px;
+  border-radius: 5px;
 }
 .infoCard {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  height: 70%;
-  width: 55%;
-  margin: auto 0;
+  justify-content: center;
+  margin-left: 28px;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 1.1rem;
+}
+.title:first-child {
+  padding-top: 4px;
+}
+.content {
+  font-size: 1rem;
+  font-weight: 200;
+  padding: 8px 0 0 4px;
+}
+.content:nth-last-child(3n + 1) {
+  padding-bottom: 18px;
 }
 
 .toggleImg {
   position: absolute;
   top: 8px;
   right: 8px;
-  height: 25px;
-  border-radius: 75px;
-}
-
-.title {
-  font-weight: bold;
-  padding-bottom: 8px;
-  font-size: 0.85em;
-}
-.content {
-  font-size: 0.85em;
+  height: 22px;
 }
