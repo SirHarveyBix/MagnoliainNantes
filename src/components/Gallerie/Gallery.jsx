@@ -63,24 +63,34 @@ export default function Gallery() {
 
   return (
     <div>
-      <h1 className="textHead">Partage tes plus belles photos</h1>
-      <form>
-        <div className="gallery-name">
-          <h2>Choisissez votre pseudo :</h2>
-          <input
-            type="text"
-            placeholder="votre nom"
-            onChange={myChangeHandler}
-          />
-        </div>
+      <h2 className="textHead">Galeries photo</h2>
+
+      <div className="form-gallery">
+        <h2 className="title-gallery">Partagez votre photo : </h2>
+        <input
+          className="gallery-input"
+          type="text"
+          placeholder="Nom"
+          onChange={myChangeHandler}
+        />
 
         <input
+          className="gallery-input"
           type="text"
-          placeholder="votre message"
+          placeholder="Message"
           onChange={myChangeHandlerMsg}
         />
-        <input type="file" accept="image/*" onChange={readImages} />
-      </form>
+        <div>
+          <input
+            name="files"
+            className="gallery-input-btn"
+            type="file"
+            accept="image/*"
+            onChange={readImages}
+          />
+        </div>
+      </div>
+
       {imageUrl
         ? imageUrl.map(({ id, url }) => (
             <div
