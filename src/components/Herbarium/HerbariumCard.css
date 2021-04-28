@@ -1,6 +1,5 @@
 .BoxHerbarium {
   font-family: 'Inter', sans-serif;
-  background-color: rgb(224 210 187 / 15%);
 }
 
 .herbier-title {
@@ -30,7 +29,7 @@
   display: flex;
   border-radius: 5px;
   margin: 20px 24px 0 24px;
-  background-color: #fff;
+  background-color: rgb(248 241 228 / 15%);
   box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
     rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
 }
