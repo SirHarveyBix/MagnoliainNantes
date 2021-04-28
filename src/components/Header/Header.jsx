@@ -6,7 +6,12 @@ import './Header.css';
 function Header({ photoHeader, user }) {
   return (
     <div className="header">
-      <img src={Logo} alt="logo" className="logo" />
+      <img
+        src={Logo}
+        alt="logo"
+        className="logo"
+        style={{ backgroundColor: 'transparent' }}
+      />
 
       <div className="avatar">
         <h2 className="titleAvatar">{user}</h2>

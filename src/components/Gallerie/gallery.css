@@ -1,0 +1,27 @@
+.textHead {
+  font-size: 22px;
+  margin: 0 0 40px 24px;
+}
+.gallery-name {
+  margin-top: 34px;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  font-size: 16px;
+}
+.image-post {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+}
+.subtext-photo {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+}
+.subtext-pseudo {
+  text-align: left;
+}
+.subtext-msg {
+  text-align: right;
+}

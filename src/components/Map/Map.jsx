@@ -30,6 +30,8 @@ import useGeoLocation from './useGeoLocation';
 import './Map.css';
 import Fleche from './img/fleche.png';
 import FlecheDown from './img/flechebas.png';
+import ArrowUp from './img/arrowup.png';
+import ArrowDown from './img/arrowdown.png';
 
 require('react-leaflet-markercluster/dist/styles.min.css');
 
@@ -48,6 +50,7 @@ const Map = ({ photoHeader, user }) => {
   const [countGaudiniere, setCountGaudiniere] = useState(0);
   const [countBlotereau, setCountBlotereau] = useState(0);
   const [isActive, setisActive] = useState(true);
+  const [isMapActive, setIsMapActive] = useState(true);
 
   const GetTopPlant = async () => {
     const temp = await fetch(`https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_collection-vegetale-nantes&q=&rows=400&start=0&refine.genre=Magnolia
@@ -76,6 +79,7 @@ const Map = ({ photoHeader, user }) => {
         adresse: 'Chemin de la justice',
         location: [47.269653, -1.584945],
       },
+      recordid: '121212215151',
     };
 
     setParcFilter(
@@ -277,16 +281,22 @@ const Map = ({ photoHeader, user }) => {
         localStorage.setItem('totalBeaujoire', countBeaujoire);
         break;
       default:
-      
     }
   }
   const handleClickActive = () =>
     isActive ? setisActive(false) : setisActive(true);
 
- 
+  const handleClickMapActive = (e) =>
+    isMapActive ? setIsMapActive(e.target.id) : setIsMapActive(false);
+
+  console.log(isMapActive);
+  console.log(parcfilter);
 
   return (
     <div>
+      <p className="txtHead">
+        Où irez vous trouver votre prochain magnolia 🌸🌱🌸 ?
+      </p>
       <div
         className={isActive ? 'footerScore isActive' : 'footerScore notActive'}
       >
@@ -302,7 +312,13 @@ const Map = ({ photoHeader, user }) => {
       <div className="BoxMap">
         {parcfilter &&
           parcfilter.map((parc) => (
-            <div className="CardMap">
+            <div
+              className={
+                isMapActive === parc.recordid
+                  ? 'CardMap isMapActive'
+                  : 'CardMap notMapActive'
+              }
+            >
               <div
                 className="CardInfo"
                 style={{
@@ -391,13 +407,21 @@ const Map = ({ photoHeader, user }) => {
                     </p>
                   </div>
                 </div>
+                <img
+                  src={isMapActive === parc.recordid ? ArrowUp : ArrowDown}
+                  key={parc.recordid}
+                  id={parc.recordid}
+                  alt=""
+                  className="arrowMap"
+                  onClick={handleClickMapActive}
+                />
               </div>
               <div className="adresseParc">
-                {' '}
                 {parc.fields.adresse}
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
                 {parc.fields.acces_transport_commun}{' '}
               </div>
+
               <MapContainer
                 center={[parc.fields.location[0], parc.fields.location[1]]}
                 zoom={13}
@@ -427,7 +451,7 @@ const Map = ({ photoHeader, user }) => {
                     >
                       <Popup keepInView closeButton={false}>
                         Espèce : {plant.fields.espece}
-                        <p>
+                        <p className="popupContent">
                           {isFound.includes(plant.recordid)
                             ? 'Vous avez déjà cette plante'
                             : plant.distance <= 2800
@@ -437,6 +461,7 @@ const Map = ({ photoHeader, user }) => {
                         <div>
                           <input
                             type="button"
+                            className="buttonAdd"
                             onClick={(e) => counter(e)}
                             disabled={
                               !(
@@ -445,10 +470,8 @@ const Map = ({ photoHeader, user }) => {
                               )
                             }
                             id={plant.recordid}
-                            value={`add ${plant.fields.espece}`}
+                            value={`Ajouter ${plant.fields.espece}`}
                           />
-
-                          <button>ta photo</button>
                         </div>
                         <img
                           src={`https://data.nantesmetropole.fr/explore/dataset/244400404_collection-vegetale-nantes/files/${plant.fields.photo1.id}/300/`}
