@@ -117,6 +117,7 @@ function Nav({
             showAll={showAll}
             setShowAll={setShowAll}
             photoHeader={photoHeader}
+            user={user}
           />
         </Route>
         <Route path="/">

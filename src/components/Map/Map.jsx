@@ -1,3 +1,8 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable react/jsx-no-duplicate-props */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable no-undef */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-shadow */
 /* eslint-disable radix */
@@ -18,15 +23,17 @@ import Beaujoire from './img/parc3.png';
 import Blotereau from './img/parc4.png';
 import Cimetier from './img/parc5.jpg';
 import Gaudiniere from './img/parc6.jpg';
-import magno from './img/dqdq.png';
+import magno from './img/magno.png';
 import Mark from './img/fleur1.png';
 import Mark2 from './img/fleur2.png';
 import useGeoLocation from './useGeoLocation';
 import './Map.css';
+import Fleche from './img/fleche.png';
+import FlecheDown from './img/flechebas.png';
 
 require('react-leaflet-markercluster/dist/styles.min.css');
 
-const Map = ({ photoHeader }) => {
+const Map = ({ photoHeader, user }) => {
   const [countPlante, setCountPlant] = useState(0);
   const [countProce, setCountProce] = useState(0);
   const [isFound, setIsFound] = useState([]);
@@ -40,6 +47,7 @@ const Map = ({ photoHeader }) => {
   const [countCimetiere, setCountCimetiere] = useState(0);
   const [countGaudiniere, setCountGaudiniere] = useState(0);
   const [countBlotereau, setCountBlotereau] = useState(0);
+  const [isActive, setisActive] = useState(true);
 
   const GetTopPlant = async () => {
     const temp = await fetch(`https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_collection-vegetale-nantes&q=&rows=400&start=0&refine.genre=Magnolia
@@ -272,6 +280,8 @@ const Map = ({ photoHeader }) => {
         console.log('rein');
     }
   }
+  const handleClickActive = () =>
+    isActive ? setisActive(false) : setisActive(true);
 
   console.log(parc);
   console.log(allPlants);
@@ -284,6 +294,18 @@ const Map = ({ photoHeader }) => {
 
   return (
     <div>
+      <div
+        className={isActive ? 'footerScore isActive' : 'footerScore notActive'}
+      >
+        <img
+          src={isActive ? Fleche : FlecheDown}
+          alt=""
+          className="fleche"
+          onClick={handleClickActive}
+        />
+        {user}&nbsp;, vous avez&nbsp;
+        {countTotal} Magnolia sur &nbsp;{showAll.length}
+      </div>
       <div className="BoxMap">
         {parcfilter &&
           parcfilter.map((parc) => (
@@ -315,7 +337,6 @@ const Map = ({ photoHeader }) => {
                 <div className="CardInfoTxt">
                   <h3>{parc.fields.nom_complet}</h3>
                   <div className="CardInfoSubTxt">
-                    <p>{parc.fields.adresse}</p>
                     <p>
                       {parc.fields.nom_complet === 'Jardin des Plantes'
                         ? countPlante
@@ -377,12 +398,18 @@ const Map = ({ photoHeader }) => {
                     </p>
                   </div>
                 </div>
-                <div className="scoreMagno" />
+              </div>
+              <div className="adresseParc">
+                {' '}
+                {parc.fields.adresse}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{' '}
+                {parc.fields.acces_transport_commun}{' '}
               </div>
               <MapContainer
                 center={[parc.fields.location[0], parc.fields.location[1]]}
                 zoom={13}
                 scrollWheelZoom={false}
+                tap={false}
               >
                 <TileLayer
                   attribution='<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

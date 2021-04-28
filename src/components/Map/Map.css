@@ -1,5 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap%27');
+body {
+  font-family: 'Inter', sans-serif;
+}
 
+.footerScore {
+  position: fixed;
+  bottom: 60px;
+  left: 0;
+  width: 100%;
+  background: rgba(34, 33, 33, 0.76);
+  z-index: 10;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.9em;
+  transition: 0.6s;
+}
+.fleche {
+  width: 30px;
+  height: auto;
+  position: absolute;
+  top: -35px;
+  left: 45%;
+  transition: 0.2s;
+}
+.isActive {
+  bottom: 5px;
+}
 /* map  */
 .BoxMap {
   display: flex;
@@ -11,22 +42,26 @@
 }
 .CardMap {
   box-sizing: border-box;
-
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
   /*box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);*/
-  width: 100%;
-  height: 485px;
+  width: 90%;
+  height: 700px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 15px;
 }
 .CardInfo {
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
   color: white;
-  height: 100px;
+  height: 120px;
   background-size: cover;
 }
 .imgParc {
@@ -37,10 +72,12 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
+  backdrop-filter: blur(1px);
 }
 .CardInfoTxt h3 {
   margin: 0px;
+  font-size: 1.5em;
 }
 .CardInfoSubTxt {
   display: flex;
@@ -50,12 +87,33 @@
 }
 .CardInfoSubTxt p {
   margin-right: 10px;
+  font-size: 1.2em;
 }
 .scoreMagno {
-  width: 100px;
-  height: 100px;
-  z-index: 100000;
-  background-image: url('./img/dqdq.png');
+  width: 80px;
+  height: 80px;
+  z-index: 1000;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.txtScoreMagno {
+  backdrop-filter: blur(1px);
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+.adresseParc {
+  color: whitesmoke;
+  background-color: rgb(0, 0, 0);
+  width: 100%;
+  padding: 5px;
+  font-size: 0.7em;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
 }
 .imgPopup {
   width: 100px;
@@ -65,7 +123,6 @@
   margin: 0px;
   border-radius: 5px;
   background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(2px);
   z-index: 1;
 }
 .leaflet-popup-content {
@@ -78,15 +135,15 @@
 }
 .leaflet-container {
   width: 100%;
-  height: 200px;
+  height: 550px;
   z-index: 0;
-  border-radius: 15px;
 
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 405px;
+
+  font-family: 'Inter', sans-serif;
 }
 .leaflet-popup-tip {
   background: rgba(255, 255, 255, 0.05);
