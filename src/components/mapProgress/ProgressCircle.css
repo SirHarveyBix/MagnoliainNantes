@@ -1,0 +1,51 @@
+.progress-circle {
+  display: flex;
+  border: 1px solid black;
+  margin: 10px;
+}
+.info-progress {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.title-progress {
+  margin-top: 30px;
+  margin-left: 45px;
+}
+.total-plants-progress {
+  display: flex;
+  align-items: center;
+}
+.total-plants-progress img {
+  height: 25px;
+}
+/* css Circle */
+.content {
+  position: relative;
+  margin-left: 36px;
+}
+.svg-progress {
+  transform: rotate(-90deg);
+}
+text {
+  font-size: 10px;
+}
+.back-path {
+  stroke: #666;
+  stroke-width: 3px;
+}
+.path {
+  --p: 0;
+  stroke-dasharray: 95;
+  stroke-dashoffset: calc(95 - (var(--p) * 95) / 100);
+  transition: stroke-dashoffset 1s linear;
+  stroke: #53d496;
+  stroke-width: 3px;
+}
+.text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-43%, -50%);
+}
