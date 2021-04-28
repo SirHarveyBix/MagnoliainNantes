@@ -47,7 +47,7 @@ input[type='file']::-webkit-file-upload-button {
 .gallery-img {
   width: 100%;
   border-top-left-radius: 5px;
-  border-top-right-radius: ;
+  border-top-right-radius: 5px;
 }
 .gallery-card-description {
   padding: 10px;
