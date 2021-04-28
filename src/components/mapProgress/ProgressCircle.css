@@ -1,7 +1,9 @@
 .progress-circle {
   display: flex;
-  border: 1px solid black;
-  margin: 10px;
+  border-radius: 5px;
+  margin: 20px 24px 0 24px;
+  background-color: rgb(248 241 228 / 15%);
+  box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.3);
 }
 .info-progress {
   display: flex;
@@ -21,9 +23,8 @@
   height: 25px;
 }
 /* css Circle */
-.content {
+.container-circle {
   position: relative;
-  margin-left: 36px;
 }
 .svg-progress {
   transform: rotate(-90deg);
