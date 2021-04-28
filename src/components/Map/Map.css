@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap%27');
 
-/* map  */
 .BoxMap {
   display: flex;
   flex-direction: column;
@@ -8,11 +7,10 @@
   align-items: center;
   box-sizing: border-box;
   width: 100%;
+  margin-bottom: 100px;
 }
 .CardMap {
   box-sizing: border-box;
-
-  /*box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);*/
   width: 100%;
   height: 485px;
   display: flex;
