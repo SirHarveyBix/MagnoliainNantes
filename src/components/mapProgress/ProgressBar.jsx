@@ -8,7 +8,7 @@ function ProgressBar({ width, progress }) {
   return (
     <div className="progress-div" style={{ width: width }}>
       <div style={{ width: `${largeurProgress}px` }} className="progress">
-        <p>{percent}%</p>
+        <p className="percent-bar">{percent}%</p>
       </div>
     </div>
   );
