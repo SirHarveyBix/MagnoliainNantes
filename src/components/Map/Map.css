@@ -163,7 +163,6 @@ body {
   border-radius: 100px;
   margin: 0.5em;
   cursor: pointer;
-  width: 100px;
 }
 .nav {
   z-index: 10;

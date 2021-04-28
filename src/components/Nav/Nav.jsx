@@ -16,16 +16,8 @@ import HomeSvg from './HomeSvg';
 import ProgressSvg from './ProgressSvg';
 import HerbierSvg from './HerbierSvg';
 import PlansSvg from './PlansSvg';
-import MapProgress from '../mapProgress/MapProgress';
+import PageProgress from '../mapProgress/PageProgress';
 
-const apiMap = {
-  name: 'Parc de Procé',
-  photo:
-    'https://domaine-de-sceaux.hauts-de-seine.fr/fileadmin/_processed_/5/2/csm_1-_plaine_orangerie_625d27e89a.jpg',
-  found: 10,
-  total: 52,
-};
-const { photo, name, found, total } = apiMap;
 function Nav({
   setPhotoHeader,
   setUsername,
@@ -57,7 +49,7 @@ function Nav({
         <div className="boxIcon">
           <NavLink
             exact
-            to="/mapProgress/"
+            to="/PageProgress/"
             className="main-nav"
             activeClassName="main-nav-active"
           >
@@ -100,15 +92,9 @@ function Nav({
             photoHeader={photoHeader}
           />
         </Route>
-        <Route path="/mapProgress/">
-          <MapProgress
-            namePark={name}
-            imgPark={photo}
-            totalPlantPark={total}
-            plantFound={found}
-          />
+        <Route path="/PageProgress/">
+          <PageProgress />
         </Route>
-
         <Route path="/Map/">
           <Map
             getMagnolia={getMagnolia}

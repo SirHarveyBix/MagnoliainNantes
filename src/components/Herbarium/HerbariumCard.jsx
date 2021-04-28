@@ -29,20 +29,16 @@ function HerbariumCard({ plant }) {
         />
       </div>
       <div className="infoCard">
-        <div className="gender">
-          <h3 className="title">Espèce</h3>
-          <p className="content">{plant.fields.espece}</p>
-        </div>
-        <div className="location">
-          <h3 className="title">Cultivar</h3>
-          <p className="content">{plant.fields.cultivar}</p>
-          <img
-            src={logoCheck}
-            alt="toggleImg"
-            className="toggleImg"
-            onClick={checkAcquis}
-          />
-        </div>
+        <h3 className="title">Espèce</h3>
+        <p className="content">{plant.fields.espece}</p>
+        <h3 className="title">Cultivar</h3>
+        <p className="content">{plant.fields.cultivar}</p>
+        <img
+          src={logoCheck}
+          alt="toggleImg"
+          className="toggleImg"
+          onClick={checkAcquis}
+        />
       </div>
     </div>
   );

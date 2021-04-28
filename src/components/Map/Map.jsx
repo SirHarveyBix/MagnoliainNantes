@@ -277,20 +277,13 @@ const Map = ({ photoHeader, user }) => {
         localStorage.setItem('totalBeaujoire', countBeaujoire);
         break;
       default:
-        console.log('rein');
+      
     }
   }
   const handleClickActive = () =>
     isActive ? setisActive(false) : setisActive(true);
 
-  console.log(parc);
-  console.log(allPlants);
-  console.log(location);
-  console.log(parcfilter);
-  console.log(topPlant);
-  console.log(showAll);
-  console.log(countGaudiniere);
-  console.log(countPlante);
+ 
 
   return (
     <div>

@@ -32,8 +32,15 @@ function HerbariumListo({ magnoliaArray, showAll, setShowAll, getMagnolia }) {
 
   return (
     <div className="BoxHerbarium">
-      <button onClick={() => showMineOnly()}>My Magno</button>
-      <button onClick={() => showAllOnly()}>All the Magno</button>
+      <h2 className="herbier-title">Mon herbier :</h2>
+      <div className="herbier-btn">
+        <button className="herbier-btn-magnolia" onClick={() => showMineOnly()}>
+          Mes Magnolias
+        </button>
+        <button className="herbier-btn-magnolia" onClick={() => showAllOnly()}>
+          Tout les Magnolias
+        </button>
+      </div>
 
       {showAll &&
         showAll.map((plant, index) => (
