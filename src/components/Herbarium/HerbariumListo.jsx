@@ -27,8 +27,12 @@ function HerbariumListo({ magnoliaArray, showAll, setShowAll, getMagnolia }) {
       valeur.fields.espece !== undefined
   );
 
-  const showMineOnly = () => setShowAll(filtered);
-  const showAllOnly = () => setShowAll(all);
+  const showMineOnly = () => {
+    setShowAll(filtered);
+  };
+  const showAllOnly = () => {
+    setShowAll(all);
+  };
 
   return (
     <div className="BoxHerbarium">
@@ -44,7 +48,16 @@ function HerbariumListo({ magnoliaArray, showAll, setShowAll, getMagnolia }) {
 
       {showAll &&
         showAll.map((plant, index) => (
-          <HerbariumCard id={index} key={plant.recordid} plant={plant} />
+          <HerbariumCard
+            id={index}
+            key={plant.recordid}
+            plant={plant}
+            gotcha={
+              plantFound !== undefined
+                ? plantFound.includes(plant.recordid)
+                : false
+            }
+          />
         ))}
     </div>
   );
