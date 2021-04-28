@@ -3,7 +3,7 @@
 }
 
 .herbier-title {
-  font-size: 1.7rem;
+  font-size: 22px;
   margin: 0 0 28px 24px;
 }
 .herbier-btn {
@@ -30,8 +30,7 @@
   border-radius: 5px;
   margin: 20px 24px 0 24px;
   background-color: rgb(248 241 228 / 15%);
-  box-shadow: rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px,
-    rgba(0, 0, 0, 0.1) 0px 1px 3px 0px, rgba(0, 0, 0, 0.06) 0px 1px 2px 0px;
+  box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.3);
 }
 
 .photoMagnolia {

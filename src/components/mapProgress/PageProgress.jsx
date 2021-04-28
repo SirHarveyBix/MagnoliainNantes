@@ -50,8 +50,9 @@ const apiMap = [
 const PageProgress = () => {
   return (
     <div className="page-progress">
-      <h2 className="progress-title">Progression par parc :</h2>
+      <h2 className="progress-title">Progression totale :</h2>
       <ProgressCircle />
+      <h2 className="progress-title">Progression par parc :</h2>
       {apiMap.map((parc) => (
         <MapProgress
           namePark={parc.name}
