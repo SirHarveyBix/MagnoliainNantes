@@ -18,7 +18,7 @@ function ProgressCircle() {
       </div>
       <div className="circle-progress">
         <div className="container-circle">
-          <svg className="svg-progress" viewBox="0 0 60 60" width="85px">
+          <svg className="svg-progress" viewBox="0 0 60 60" width="100px">
             <circle
               className="back-path"
               cx="30"
