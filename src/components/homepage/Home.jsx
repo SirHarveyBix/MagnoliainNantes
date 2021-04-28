@@ -26,7 +26,7 @@ const Home = ({
     },
     {
       key: 2,
-      avatar: avatar2,
+      avatar: avatar4,
     },
     {
       key: 3,
@@ -34,7 +34,7 @@ const Home = ({
     },
     {
       key: 4,
-      avatar: avatar4,
+      avatar: avatar2,
     },
     {
       key: 5,

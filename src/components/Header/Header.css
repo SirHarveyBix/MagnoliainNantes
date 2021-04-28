@@ -6,7 +6,7 @@
 }
 
 .titleAvatar {
-  font-size: 1em;
+  font-size: 0.8rem;
   font-family: 'Inter', sans-serif;
   margin-right: 15px;
 }
@@ -16,10 +16,13 @@
 }
 .avatarImg {
   width: 60px;
+  background-color: #65c9ff;
+  border-radius: 100%;
 }
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5px 15px;
+  padding: 10px 5px 5px 15px;
+  margin-bottom: 48px;
 }
