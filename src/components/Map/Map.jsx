@@ -278,11 +278,8 @@ const Map = ({ photoHeader }) => {
         localStorage.setItem('totalBeaujoire', countBeaujoire);
         break;
       default:
-      
     }
   }
-
- 
 
   return (
     <div>
