@@ -389,6 +389,7 @@ const Map = ({ photoHeader }) => {
                 center={[parc.fields.location[0], parc.fields.location[1]]}
                 zoom={13}
                 scrollWheelZoom={false}
+                tap={false}
               >
                 <TileLayer
                   attribution='<a href="http://jawg.io" title="Tiles Courtesy of Jawg Maps" target="_blank">&copy; <b>Jawg</b>Maps</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

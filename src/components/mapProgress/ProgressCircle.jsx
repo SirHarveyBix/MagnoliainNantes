@@ -2,9 +2,8 @@ import logo from './Vector.png';
 import './ProgressCircle.css';
 
 function ProgressCircle() {
-  const array = ['4', '5', '1', '2', '3', '4', '5', '1', '2', '3', '4'];
-
-  const herbariumPercent = (array.length * 100) / 126;
+  const countTotalHerb = localStorage.getItem('total');
+  const herbariumPercent = (countTotalHerb * 100) / 126;
 
   return (
     <div className="progress-circle">
@@ -14,7 +13,7 @@ function ProgressCircle() {
         </div>
         <div className="total-plants-progress">
           <img src={logo} alt="logo" />
-          <p>12/126</p>
+          <p>{countTotalHerb}/126</p>
         </div>
       </div>
       <div className="circle-progress">
