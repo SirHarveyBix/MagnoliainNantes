@@ -35,6 +35,7 @@ function App() {
   }, []);
   return (
     <div className="App">
+      <div className="clip" />
       {homeActive === true ? (
         <Header
           photoHeader={photoHeader}

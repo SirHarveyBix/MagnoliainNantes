@@ -52,11 +52,11 @@ function HerbariumListo({ magnoliaArray, showAll, setShowAll, getMagnolia }) {
             id={index}
             key={plant.recordid}
             plant={plant}
-            gotcha={
+            /* gotcha={
               plantFound !== undefined
                 ? plantFound.includes(plant.recordid)
                 : false
-            }
+            } */
           />
         ))}
     </div>

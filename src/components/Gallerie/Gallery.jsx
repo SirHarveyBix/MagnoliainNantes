@@ -14,11 +14,22 @@ export default function Gallery() {
   const [name, setName] = useState('user');
   const [champmsg, setChampmsg] = useState('msg');
   const [msg, setMsg] = useState('msg');
+  const [date, setDate] = useState('date');
   const readImages = async (e) => {
     e.preventDefault();
     const file = e.target.files[0];
     console.log(e.target.files[0]);
     const id = uuid();
+    const date1 = new Date();
+    const dateLocale = date1.toLocaleString('fr-FR', {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    });
     const storageRef = firebase.storage().ref().child(id);
     const imageRef = firebase.database().ref('images').child('daily').child(id);
     await storageRef.put(file);
@@ -26,6 +37,7 @@ export default function Gallery() {
       imageRef.child(src).set(url);
       imageRef.child(name).set(text);
       imageRef.child(champmsg).set(msg);
+      imageRef.child(date).set(dateLocale);
       const newState = [...imageUrl, { id, url }];
       setImageUrl(newState);
     });
@@ -99,7 +111,10 @@ export default function Gallery() {
               <img src={url.name} alt="" className="gallery-img" />
               <div className="gallery-card-description">
                 <p className="gallery-card-description-text">
-                  &quot;{url.msg}&quot;, {url.user}
+                  &quot;{url.msg}&quot;, {url.user}&quot;
+                </p>
+                <p style={{ textAlign: 'right', fontSize: '10px' }}>
+                  {url.date}
                 </p>
               </div>
               <div className="gallery-social">
