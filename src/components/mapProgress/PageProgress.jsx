@@ -28,7 +28,7 @@ const apiMap = [
     name: 'Jardin des Plantes',
     photo:
       'https://www.parcsetjardins.fr/data/cache/GardenPicture/picture/main/2/2/9384.1606317648.jpg',
-    found: localStorage.getItem('contJardinPlante'),
+    found: localStorage.getItem('totalJardinPlante'),
     total: 3,
   },
   {

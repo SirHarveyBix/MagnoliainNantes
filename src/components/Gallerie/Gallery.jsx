@@ -1,4 +1,6 @@
+/* eslint-disable prefer-const */
 /* eslint-disable indent */
+/* eslint-disable no-unused-vars */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from 'react';
@@ -9,22 +11,18 @@ import './gallery.css';
 export default function Gallery() {
   const [imageUrl, setImageUrl] = useState([]);
   const [text, setText] = useState('');
-  const [src, setSrc] = useState('');
-  const [name, setName] = useState('');
-  const [champmsg, setChampmsg] = useState('');
-  const [msg, setMsg] = useState('');
-  const [date, setDate] = useState('');
+  const [src, setSrc] = useState('name');
+  const [name, setName] = useState('user');
+  const [champmsg, setChampmsg] = useState('msg');
+  const [msg, setMsg] = useState('msg');
+  const [date, setDate] = useState('date');
   const readImages = async (e) => {
-    setSrc('name');
-    setName('user');
-    setChampmsg('msg');
-    setDate('date');
     e.preventDefault();
     const file = e.target.files[0];
     console.log(e.target.files[0]);
     const id = uuid();
-    const date1 = new Date();
-    const dateLocale = date1.toLocaleString('fr-FR', {
+    let date1 = new Date();
+    let dateLocale = date1.toLocaleString('fr-FR', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
@@ -33,6 +31,7 @@ export default function Gallery() {
       minute: 'numeric',
       second: 'numeric',
     });
+    console.log(dateLocale);
     const storageRef = firebase.storage().ref().child(id);
     const imageRef = firebase.database().ref('images').child('daily').child(id);
     await storageRef.put(file);
@@ -58,20 +57,26 @@ export default function Gallery() {
     imageRef.on('value', (snapshot) => {
       const imageUrls = snapshot.val();
       const urls = [];
-      for (const id in imageUrls) {
+      for (let id in imageUrls) {
         urls.push({ id, url: imageUrls[id] });
       }
       const newState = [...imageUrl, ...urls];
       setImageUrl(newState);
     });
   };
-
+  const deleteImage = (id) => {
+    const storageRef = firebase.storage().ref().child(id);
+    const imageRef = firebase.database().ref('images').child('daily').child(id);
+    storageRef.delete().then(() => {
+      imageRef.remove();
+    });
+  };
   useEffect(() => {
     getImageUrl();
   }, []);
 
   return (
-    <div>
+    <div className="boxGallery">
       <h2 className="textHead">Galeries photo</h2>
 
       <div className="form-gallery">
@@ -101,13 +106,14 @@ export default function Gallery() {
           </div>
         </div>
       </div>
+
       {imageUrl
         ? imageUrl.map(({ id, url }) => (
             <div className="gallery-card" key={id.name}>
               <img src={url.name} alt="" className="gallery-img" />
               <div className="gallery-card-description">
                 <p className="gallery-card-description-text">
-                  &quot;{url.msg}&quot;, {url.user}&quot;
+                  &quot;{url.msg}&quot;, {url.user}
                 </p>
                 <p style={{ textAlign: 'right', fontSize: '10px' }}>
                   {url.date}
