@@ -45,7 +45,14 @@ function HerbariumListo({ magnoliaArray, showAll, setShowAll, getMagnolia }) {
 
       {showAll &&
         showAll.map((plant, index) => (
-          <HerbariumCard id={index} key={plant.recordid} plant={plant} />
+          <HerbariumCard
+            id={index}
+            key={plant.recordid}
+            plant={plant}
+            gotcha={
+              plantFound !== null ? plantFound.includes(plant.recordid) : false
+            }
+          />
         ))}
     </div>
   );

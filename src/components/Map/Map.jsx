@@ -1,8 +1,4 @@
 /* eslint-disable indent */
-/* eslint-disable no-restricted-properties */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-param-reassign */
-/* eslint-disable radix */
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
@@ -29,9 +25,11 @@ const Map = ({ photoHeader, user }) => {
   const [countPlante, setCountPlant] = useState(0);
   const [countProce, setCountProce] = useState(0);
   const [isFound, setIsFound] = useState([]);
+  // eslint-disable-next-line no-unused-vars
   const [parco, SetParc] = useState([]);
   const [parcfilter, setParcFilter] = useState([]);
   const [countTotal, setCountTotal] = useState(0);
+  // eslint-disable-next-line no-unused-vars
   const [topPlant, SetTopPlant] = useState([]);
   const [showAll, setShowAll] = useState([]);
   const [countBeaujoire, setCountBeaujoire] = useState(0);
@@ -103,13 +101,13 @@ const Map = ({ photoHeader, user }) => {
     console.log(JSON.parse(plantfound));
     if (plantfound && total) {
       setIsFound(JSON.parse(plantfound));
-      setCountTotal(parseInt(total));
-      setCountPlant(parseInt(totalPlante));
-      setCountProce(parseInt(totalProce));
-      setCountBeaujoire(parseInt(totalBeaujoire));
-      setCountBlotereau(parseInt(totalBlotereau));
-      setCountGaudiniere(parseInt(totalGaudiniere));
-      setCountCimetiere(parseInt(totalCimetiere));
+      setCountTotal(parseInt(total, 10));
+      setCountPlant(parseInt(totalPlante, 10));
+      setCountProce(parseInt(totalProce, 10));
+      setCountBeaujoire(parseInt(totalBeaujoire, 10));
+      setCountBlotereau(parseInt(totalBlotereau, 10));
+      setCountGaudiniere(parseInt(totalGaudiniere, 10));
+      setCountCimetiere(parseInt(totalCimetiere, 10));
     }
   }, []);
   function toRadian(degree) {
@@ -128,8 +126,8 @@ const Map = ({ photoHeader, user }) => {
     const deltaLon = lon2 - lon1;
 
     const a =
-      Math.pow(Math.sin(deltaLat / 2), 2) +
-      Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(deltaLon / 2), 2);
+      Math.sin(deltaLat / 2) ** 2 +
+      Math.cos(lat1) * Math.cos(lat2) * Math.sin(deltaLon / 2) ** 2;
     const c = 2 * Math.asin(Math.sqrt(a));
     const EARTH_RADIUS = 6371;
     return c * EARTH_RADIUS * 1000;
@@ -166,7 +164,8 @@ const Map = ({ photoHeader, user }) => {
       location.coordinates.lat,
       location.coordinates.lng,
     ]);
-    plant.distance = parseInt(distance.toFixed(0));
+    // eslint-disable-next-line no-param-reassign
+    plant.distance = parseInt(distance.toFixed(0), 10);
     return plant;
   });
   function add(cont, setCont) {
