@@ -16,6 +16,7 @@ import HomeSvg from './HomeSvg';
 import ProgressSvg from './ProgressSvg';
 import HerbierSvg from './HerbierSvg';
 import PlansSvg from './PlansSvg';
+import GallerySvg from './GallerySvg';
 import PageProgress from '../mapProgress/PageProgress';
 import Gallery from '../Gallerie/Gallery';
 
@@ -87,8 +88,8 @@ function Nav({
             className="main-nav"
             activeClassName="main-nav-active"
           >
-            <PlansSvg fill="white" onClick={() => setHomeActive(true)} />
-            <p>Gallerie</p>
+            <GallerySvg fill="white" onClick={() => setHomeActive(true)} />
+            <p>Galerie</p>
           </NavLink>
         </div>
       </nav>

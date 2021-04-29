@@ -60,21 +60,25 @@ input[type='file']::-webkit-file-upload-button {
 }
 .gallery-social {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   border-top: 1px solid #53d496;
-  padding-left: 15px;
 }
-.content-social {
+.content-social1,
+.content-social2,
+.content-social3 {
   display: flex;
+  justify-content: center;
   align-items: center;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+.content-social2 {
+  border-left: 1px solid #53d496;
+  border-right: 1px solid #53d496;
 }
 .gallery-social p {
   padding: 10px 20px;
 }
 .content-social p {
   padding-left: 5px;
-}
-.p-middle {
-  border-right: 1px solid #53d496;
-  border-left: 1px solid #53d496;
 }
