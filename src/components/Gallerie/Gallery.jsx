@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable indent */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
@@ -10,12 +9,16 @@ import './gallery.css';
 export default function Gallery() {
   const [imageUrl, setImageUrl] = useState([]);
   const [text, setText] = useState('');
-  const [src, setSrc] = useState('name');
-  const [name, setName] = useState('user');
-  const [champmsg, setChampmsg] = useState('msg');
-  const [msg, setMsg] = useState('msg');
-  const [date, setDate] = useState('date');
+  const [src, setSrc] = useState('');
+  const [name, setName] = useState('');
+  const [champmsg, setChampmsg] = useState('');
+  const [msg, setMsg] = useState('');
+  const [date, setDate] = useState('');
   const readImages = async (e) => {
+    setSrc('name');
+    setName('user');
+    setChampmsg('msg');
+    setDate('date');
     e.preventDefault();
     const file = e.target.files[0];
     console.log(e.target.files[0]);
@@ -62,13 +65,7 @@ export default function Gallery() {
       setImageUrl(newState);
     });
   };
-  const deleteImage = (id) => {
-    const storageRef = firebase.storage().ref().child(id);
-    const imageRef = firebase.database().ref('images').child('daily').child(id);
-    storageRef.delete().then(() => {
-      imageRef.remove();
-    });
-  };
+
   useEffect(() => {
     getImageUrl();
   }, []);
@@ -104,7 +101,6 @@ export default function Gallery() {
           </div>
         </div>
       </div>
-
       {imageUrl
         ? imageUrl.map(({ id, url }) => (
             <div className="gallery-card" key={id.name}>

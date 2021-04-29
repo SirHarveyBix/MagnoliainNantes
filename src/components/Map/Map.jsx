@@ -1,16 +1,9 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable react/jsx-no-duplicate-props */
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-undef */
-/* eslint-disable react/button-has-type */
-/* eslint-disable no-shadow */
-/* eslint-disable radix */
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-restricted-properties */
-/* eslint-disable no-use-before-define */
 /* eslint-disable indent */
+/* eslint-disable no-use-before-define */
+/* eslint-disable no-restricted-properties */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-param-reassign */
+/* eslint-disable radix */
 /* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
@@ -23,15 +16,13 @@ import Beaujoire from './img/parc3.png';
 import Blotereau from './img/parc4.png';
 import Cimetier from './img/parc5.jpg';
 import Gaudiniere from './img/parc6.jpg';
-import magno from './img/magno.png';
+
 import Mark from './img/fleur1.png';
 import Mark2 from './img/fleur2.png';
 import useGeoLocation from './useGeoLocation';
 import './Map.css';
-import Fleche from './img/fleche.png';
-import FlecheDown from './img/flechebas.png';
-import ArrowUp from './img/arrowup.png';
-import ArrowDown from './img/arrowdown.png';
+import Fleche from './img/flecheup.png';
+import FlecheDown from './img/flechedown.png';
 
 require('react-leaflet-markercluster/dist/styles.min.css');
 
@@ -39,9 +30,8 @@ const Map = ({ photoHeader, user }) => {
   const [countPlante, setCountPlant] = useState(0);
   const [countProce, setCountProce] = useState(0);
   const [isFound, setIsFound] = useState([]);
-  const [parc, SetParc] = useState([]);
+  const [parco, SetParc] = useState([]);
   const [parcfilter, setParcFilter] = useState([]);
-  const [newParc, setNewParc] = useState([]);
   const [countTotal, setCountTotal] = useState(0);
   const [topPlant, SetTopPlant] = useState([]);
   const [showAll, setShowAll] = useState([]);
@@ -50,7 +40,6 @@ const Map = ({ photoHeader, user }) => {
   const [countGaudiniere, setCountGaudiniere] = useState(0);
   const [countBlotereau, setCountBlotereau] = useState(0);
   const [isActive, setisActive] = useState(true);
-  const [isMapActive, setIsMapActive] = useState(true);
 
   const GetTopPlant = async () => {
     const temp = await fetch(`https://data.nantesmetropole.fr/api/records/1.0/search/?dataset=244400404_collection-vegetale-nantes&q=&rows=400&start=0&refine.genre=Magnolia
@@ -178,7 +167,6 @@ const Map = ({ photoHeader, user }) => {
       location.coordinates.lng,
     ]);
     plant.distance = parseInt(distance.toFixed(0));
-    plant.isfound = false;
     return plant;
   });
 
@@ -286,10 +274,6 @@ const Map = ({ photoHeader, user }) => {
   const handleClickActive = () =>
     isActive ? setisActive(false) : setisActive(true);
 
-  const handleClickMapActive = (e) =>
-    isMapActive ? setIsMapActive(e.target.id) : setIsMapActive(false);
-
-  console.log(isMapActive);
   console.log(parcfilter);
 
   return (
@@ -300,25 +284,16 @@ const Map = ({ photoHeader, user }) => {
       <div
         className={isActive ? 'footerScore isActive' : 'footerScore notActive'}
       >
-        <img
-          src={isActive ? Fleche : FlecheDown}
-          alt=""
-          className="fleche"
-          onClick={handleClickActive}
-        />
+        <button type="button" onClick={handleClickActive}>
+          <img src={isActive ? Fleche : FlecheDown} alt="" className="fleche" />
+        </button>
         {user}&nbsp;, vous avez&nbsp;
         {countTotal} Magnolia sur &nbsp;{showAll.length}
       </div>
       <div className="BoxMap">
         {parcfilter &&
           parcfilter.map((parc) => (
-            <div
-              className={
-                isMapActive === parc.recordid
-                  ? 'CardMap isMapActive'
-                  : 'CardMap notMapActive'
-              }
-            >
+            <div className="CardMap">
               <div
                 className="CardInfo"
                 style={{
@@ -407,14 +382,6 @@ const Map = ({ photoHeader, user }) => {
                     </p>
                   </div>
                 </div>
-                <img
-                  src={isMapActive === parc.recordid ? ArrowUp : ArrowDown}
-                  key={parc.recordid}
-                  id={parc.recordid}
-                  alt=""
-                  className="arrowMap"
-                  onClick={handleClickMapActive}
-                />
               </div>
               <div className="adresseParc">
                 {parc.fields.adresse}
