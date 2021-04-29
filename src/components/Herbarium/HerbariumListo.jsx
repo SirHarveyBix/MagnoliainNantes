@@ -13,11 +13,8 @@ function HerbariumListo({ magnoliaArray, showAll, setShowAll, getMagnolia }) {
     setPlantFound(plantfound);
   }, []);
 
-  const filtered = magnoliaArray.filter(
-    (valeur) =>
-      plantFound !== undefined ? plantFound.includes(valeur.recordid) : ''
-    /* valeur.fields.photo1 !== undefined &&
-      valeur.fields.nom_du_site === 'Arboretum Cimetière Parc' */
+  const filtered = magnoliaArray.filter((valeur) =>
+    plantFound !== null ? plantFound.includes(valeur.recordid) : ''
   );
 
   const all = magnoliaArray.filter(
@@ -53,9 +50,7 @@ function HerbariumListo({ magnoliaArray, showAll, setShowAll, getMagnolia }) {
             key={plant.recordid}
             plant={plant}
             gotcha={
-              plantFound !== undefined
-                ? plantFound.includes(plant.recordid)
-                : false
+              plantFound !== null ? plantFound.includes(plant.recordid) : false
             }
           />
         ))}

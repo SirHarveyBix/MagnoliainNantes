@@ -155,3 +155,20 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+.clip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  transition: 3s;
+  z-index: -1;
+  background-color: #85ffbd;
+  background-image: linear-gradient(45deg, #85ffbd 0%, #fffb7d 100%);
+  -webkit-clip-path: ellipse(64% 17% at 50% 0%);
+  clip-path: ellipse(64% 17% at 50% 0%);
+}

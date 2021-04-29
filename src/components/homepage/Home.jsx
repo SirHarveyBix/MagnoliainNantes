@@ -51,7 +51,8 @@ const Home = ({
   useEffect(() => {
     const loggedInUser = localStorage.getItem('name');
     const loggedAvatar = localStorage.getItem('photo');
-    localStorage.setItem('isfound', []);
+
+    localStorage.getItem('isfound');
     if (loggedInUser && loggedAvatar) {
       setUser(loggedInUser);
       setPhotoHeader(loggedAvatar);

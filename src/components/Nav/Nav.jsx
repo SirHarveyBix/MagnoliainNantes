@@ -17,6 +17,7 @@ import ProgressSvg from './ProgressSvg';
 import HerbierSvg from './HerbierSvg';
 import PlansSvg from './PlansSvg';
 import PageProgress from '../mapProgress/PageProgress';
+import Gallery from '../Gallerie/Gallery';
 
 function Nav({
   setPhotoHeader,
@@ -79,6 +80,17 @@ function Nav({
             <p>Plans</p>
           </NavLink>
         </div>
+        <div className="boxIcon">
+          <NavLink
+            exact
+            to="/Gallerie/"
+            className="main-nav"
+            activeClassName="main-nav-active"
+          >
+            <PlansSvg fill="white" onClick={() => setHomeActive(true)} />
+            <p>Gallerie</p>
+          </NavLink>
+        </div>
       </nav>
 
       <Switch>
@@ -103,6 +115,18 @@ function Nav({
             showAll={showAll}
             setShowAll={setShowAll}
             photoHeader={photoHeader}
+            user={user}
+          />
+        </Route>
+        <Route path="/Gallerie/">
+          <Gallery
+            getMagnolia={getMagnolia}
+            magnoliaArray={magnoliaArray}
+            setMagnoliaArray={setMagnoliaArray}
+            showAll={showAll}
+            setShowAll={setShowAll}
+            photoHeader={photoHeader}
+            user={user}
           />
         </Route>
         <Route path="/">
