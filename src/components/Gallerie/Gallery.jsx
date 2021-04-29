@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable no-undef */
 /* eslint-disable prefer-const */
 /* eslint-disable indent */
 /* eslint-disable no-unused-vars */
@@ -16,11 +18,12 @@ export default function Gallery() {
   const [champmsg, setChampmsg] = useState('msg');
   const [msg, setMsg] = useState('msg');
   const [date, setDate] = useState('date');
+  const id = uuid();
   const readImages = async (e) => {
     e.preventDefault();
     const file = e.target.files[0];
     console.log(e.target.files[0]);
-    const id = uuid();
+
     let date1 = new Date();
     let dateLocale = date1.toLocaleString('fr-FR', {
       weekday: 'long',
@@ -53,7 +56,12 @@ export default function Gallery() {
     console.log(text);
   };
   const getImageUrl = () => {
-    const imageRef = firebase.database().ref('images').child('daily');
+    const imageRef = firebase
+      .database()
+      .ref('images')
+      .child(`daily${id}`)
+      .orderByChild('date')
+      .limitToLast(10);
     imageRef.on('value', (snapshot) => {
       const imageUrls = snapshot.val();
       const urls = [];
@@ -76,7 +84,7 @@ export default function Gallery() {
   }, []);
 
   return (
-    <div className="boxGallery">
+    <form className="boxGallery">
       <h2 className="textHead">Galeries photo</h2>
 
       <div className="form-gallery">
@@ -104,6 +112,9 @@ export default function Gallery() {
               onChange={readImages}
             />
           </div>
+          <button type="submit" className="buttonSend">
+            Envoyer
+          </button>
         </div>
       </div>
 
@@ -139,6 +150,6 @@ export default function Gallery() {
             </div>
           ))
         : ''}
-    </div>
+    </form>
   );
 }
