@@ -1,5 +1,4 @@
 /* eslint-disable indent */
-/* eslint-disable no-use-before-define */
 /* eslint-disable no-restricted-properties */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-param-reassign */
@@ -113,10 +112,13 @@ const Map = ({ photoHeader, user }) => {
       setCountCimetiere(parseInt(totalCimetiere));
     }
   }, []);
-
+  function toRadian(degree) {
+    return (degree * Math.PI) / 180;
+  }
   // function to get distance beetween user and all plant
   function getDistance(origin, destination) {
     // return distance in meters
+
     const lon1 = toRadian(origin[1]);
     const lat1 = toRadian(origin[0]);
     const lon2 = toRadian(destination[1]);
@@ -132,9 +134,7 @@ const Map = ({ photoHeader, user }) => {
     const EARTH_RADIUS = 6371;
     return c * EARTH_RADIUS * 1000;
   }
-  function toRadian(degree) {
-    return (degree * Math.PI) / 180;
-  }
+
   // marker for plant
   const markerIcon = new L.Icon({
     iconUrl: Mark,
@@ -169,52 +169,6 @@ const Map = ({ photoHeader, user }) => {
     plant.distance = parseInt(distance.toFixed(0));
     return plant;
   });
-
-  const counter = (e) => {
-    e.preventDefault();
-    const plantFound = isFound;
-    plantFound.push(e.target.id);
-    console.log(plantFound);
-    setIsFound(plantFound);
-    localStorage.setItem('isfound', JSON.stringify(plantFound));
-    setCountTotal(
-      countPlante +
-        countProce +
-        countBlotereau +
-        countCimetiere +
-        countGaudiniere +
-        countBeaujoire +
-        1
-    );
-
-    allPlants.map((position) =>
-      position.distance <= 2800 &&
-      position.fields.nom_du_site === 'Jardin des Plantes'
-        ? add(countPlante, setCountPlant)
-        : '' ||
-          (position.distance <= 2800 &&
-            position.fields.nom_du_site === 'Parc de Procé')
-        ? add(countProce, setCountProce)
-        : '' ||
-          (position.distance <= 2800 &&
-            position.fields.nom_du_site === 'Parc floral de la Beaujoire')
-        ? add(countBeaujoire, setCountBeaujoire)
-        : '' ||
-          (position.distance <= 2800 &&
-            position.fields.nom_du_site === 'Parc de la Gaudinière')
-        ? add(countGaudiniere, setCountGaudiniere)
-        : '' ||
-          (position.distance <= 2800 &&
-            position.fields.nom_du_site === 'Parc exotique du Grand-Blottereau')
-        ? add(countBlotereau, setCountBlotereau)
-        : '' ||
-          (position.distance <= 2800 &&
-            position.fields.nom_du_site === 'Arboretum Cimetière Parc')
-        ? add(countCimetiere, setCountCimetiere)
-        : ''
-    );
-  };
-
   function add(cont, setCont) {
     const newcount = cont + 1;
     setCont(newcount);
@@ -271,6 +225,51 @@ const Map = ({ photoHeader, user }) => {
       default:
     }
   }
+  const counter = (e) => {
+    e.preventDefault();
+    const plantFound = isFound;
+    plantFound.push(e.target.id);
+    console.log(plantFound);
+    setIsFound(plantFound);
+    localStorage.setItem('isfound', JSON.stringify(plantFound));
+    setCountTotal(
+      countPlante +
+        countProce +
+        countBlotereau +
+        countCimetiere +
+        countGaudiniere +
+        countBeaujoire +
+        1
+    );
+
+    allPlants.map((position) =>
+      position.distance <= 2800 &&
+      position.fields.nom_du_site === 'Jardin des Plantes'
+        ? add(countPlante, setCountPlant)
+        : '' ||
+          (position.distance <= 2800 &&
+            position.fields.nom_du_site === 'Parc de Procé')
+        ? add(countProce, setCountProce)
+        : '' ||
+          (position.distance <= 2800 &&
+            position.fields.nom_du_site === 'Parc floral de la Beaujoire')
+        ? add(countBeaujoire, setCountBeaujoire)
+        : '' ||
+          (position.distance <= 2800 &&
+            position.fields.nom_du_site === 'Parc de la Gaudinière')
+        ? add(countGaudiniere, setCountGaudiniere)
+        : '' ||
+          (position.distance <= 2800 &&
+            position.fields.nom_du_site === 'Parc exotique du Grand-Blottereau')
+        ? add(countBlotereau, setCountBlotereau)
+        : '' ||
+          (position.distance <= 2800 &&
+            position.fields.nom_du_site === 'Arboretum Cimetière Parc')
+        ? add(countCimetiere, setCountCimetiere)
+        : ''
+    );
+  };
+
   const handleClickActive = () =>
     isActive ? setisActive(false) : setisActive(true);
 
