@@ -44,7 +44,7 @@ function Nav({
             className="main-nav"
             activeClassName="main-nav-active"
           >
-            <HomeSvg fill="white" onClick={() => setHomeActive(false)} />
+            <HomeSvg fill="white" onClick={() => setHomeActive(true)} />
             <p>Home</p>
           </NavLink>
         </div>

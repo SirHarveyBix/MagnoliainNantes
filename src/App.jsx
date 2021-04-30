@@ -7,7 +7,7 @@ function App() {
   const [photoHeader, setPhotoHeader] = useState(null);
   const [username, setUsername] = useState('');
   const [user, setUser] = useState('');
-  const [homeActive, setHomeActive] = useState(false);
+  const [homeActive, setHomeActive] = useState(true);
   const [magnoliaArray, setMagnoliaArray] = useState([]);
   const [showAll, setShowAll] = useState([magnoliaArray]);
 
