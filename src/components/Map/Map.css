@@ -84,7 +84,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(1px);
+  padding: 10px;
+  backdrop-filter: blur(1.5px);
 }
 .CardInfoTxt h3 {
   margin: 0px;
