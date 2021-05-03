@@ -81,9 +81,9 @@ export default function Gallery({ photoHeader }) {
         urls.push({ id, url: imageUrls[id] });
       }
 
-      console.log(snapshot.val);
+     
       setImageUrl(urls);
-      console.log(imageUrl);
+      
     });
   };
   const deleteImage = (id) => {
