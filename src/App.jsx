@@ -32,7 +32,16 @@ function App() {
 
   useEffect(() => {
     getMagnolia();
-  }, []);
+    const loggedInUser = localStorage.getItem('name');
+    const loggedAvatar = localStorage.getItem('photo');
+
+    localStorage.getItem('isfound');
+    if (loggedInUser && loggedAvatar) {
+      setUser(loggedInUser);
+      setPhotoHeader(loggedAvatar);
+    }
+  }, [user, photoHeader]);
+
   return (
     <div className="App">
       <div className="clip" />
