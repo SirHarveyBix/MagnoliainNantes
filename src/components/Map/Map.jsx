@@ -11,9 +11,8 @@ import Beaujoire from './img/parc3.png';
 import Blotereau from './img/parc4.png';
 import Cimetier from './img/parc5.jpg';
 import Gaudiniere from './img/parc6.jpg';
-
-import Mark from './img/fleur1.png';
-import Mark2 from './img/fleur2.png';
+import Mark from './img/logo1.png';
+import Mark2 from './img/logo2.png';
 import useGeoLocation from './useGeoLocation';
 import './Map.css';
 import Fleche from './img/flecheup.png';
@@ -135,14 +134,14 @@ const Map = ({ photoHeader, user }) => {
 
   // marker for plant
   const markerIcon = new L.Icon({
-    iconUrl: Mark,
-    iconSize: [40, 70],
+    iconUrl: Mark2,
+    iconSize: [50, 50],
     iconAnchor: [17, 50], // [left/right, top/bottom]
     popupAnchor: [0, -50], // [left/right, top/bottom]
   });
   const markerIsFound = new L.Icon({
-    iconUrl: Mark2,
-    iconSize: [40, 70],
+    iconUrl: Mark,
+    iconSize: [50, 50],
     iconAnchor: [17, 50], // [left/right, top/bottom]
     popupAnchor: [0, -50], // [left/right, top/bottom]
   });

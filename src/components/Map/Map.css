@@ -47,6 +47,9 @@ body {
   width: 100%;
   margin-bottom: 90px;
 }
+.marker {
+  fill: green;
+}
 .CardMap {
   box-sizing: border-box;
   border-top-left-radius: 50px;
@@ -94,9 +97,11 @@ body {
 }
 .CardInfoTxt h3 {
   margin: 0px;
-  font-size: 1.7em;
+  font-size: 1.5em;
   font-weight: 500;
+  text-align: center;
 }
+
 .CardInfoSubTxt {
   display: flex;
   justify-content: space-around;

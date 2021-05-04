@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+
 /* eslint-disable no-shadow */
 /* eslint-disable no-undef */
 /* eslint-disable prefer-const */
@@ -9,6 +11,9 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 import firebase from './firebaseConfig';
 import './gallery.css';
+import like from './pouce.png';
+import likenot from './poucevert.png';
+import Like from './Like';
 
 export default function Gallery({ photoHeader }) {
   const [imageUrl, setImageUrl] = useState([]);
@@ -21,6 +26,10 @@ export default function Gallery({ photoHeader }) {
   const [commentary, setCommentary] = useState('');
   const [nameComment, setNameComment] = useState('');
   const [time, setTime] = useState('time');
+  const [commentActive, setCommentActive] = useState(false);
+  const [favorite, setFavorite] = useState([]);
+  const [gotLike, setGotLike] = useState(null);
+
   const id = uuid();
 
   const readImages = async (e) => {
@@ -67,8 +76,9 @@ export default function Gallery({ photoHeader }) {
     setCommentary(event.target.value);
     console.log(commentary);
   };
-  const myChangeHandlerNameCommentary = (event) => {
-    setNameComment(event.target.value);
+  const myChangeHandlerNameCommentary = (e) => {
+    setNameComment(e.target.value);
+    console.log(nameComment);
   };
 
   const getImageUrl = () => {
@@ -86,21 +96,25 @@ export default function Gallery({ photoHeader }) {
   };
   const deleteImage = (id) => {
     const storageRef = firebase.storage().ref().child(id);
-    const imageRef = firebase.database().ref('images').child('daily').child(id);
+    const imageRef = firebase.database().ref('images').child(id);
     storageRef.delete().then(() => {
       imageRef.remove();
     });
   };
+
   useEffect(() => {
     getImageUrl();
+    const like = localStorage.getItem('like');
+
+    setFavorite(JSON.parse(like));
 
     console.log(imageUrl);
+    console.log(favorite);
   }, []);
   const handleSubmitCommentary = (id) => {
     let commentRef = firebase
       .database()
       .ref('images')
-      .child('daily')
       .child(id)
       .child('comment');
     const comment = {
@@ -111,6 +125,7 @@ export default function Gallery({ photoHeader }) {
     setCommentary('');
     setNameComment('');
   };
+
   return (
     <form className="boxGallery">
       <h2 className="textHead">Galeries photo</h2>
@@ -170,16 +185,13 @@ export default function Gallery({ photoHeader }) {
                     </p>
                   </div>
                   <div className="gallery-social">
-                    <div className="content-social1">
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        fill="#53d496"
-                      >
-                        <path d="M21.406 9.558c-1.21-.051-2.87-.278-3.977-.744.809-3.283 1.253-8.814-2.196-8.814-1.861 0-2.351 1.668-2.833 3.329-1.548 5.336-3.946 6.816-6.4 7.401v-.73h-6v12h6v-.904c2.378.228 4.119.864 6.169 1.746 1.257.541 3.053 1.158 5.336 1.158 2.538 0 4.295-.997 5.009-3.686.5-1.877 1.486-7.25 1.486-8.25 0-1.648-1.168-2.446-2.594-2.506zm-17.406 10.442h-2v-8h2v8zm15.896-5.583s.201.01 1.069-.027c1.082-.046 1.051 1.469.004 1.563l-1.761.099c-.734.094-.656 1.203.141 1.172 0 0 .686-.017 1.143-.041 1.068-.056 1.016 1.429.04 1.551-.424.053-1.745.115-1.745.115-.811.072-.706 1.235.109 1.141l.771-.031c.822-.074 1.003.825-.292 1.661-1.567.881-4.685.131-6.416-.614-2.239-.965-4.438-1.934-6.959-2.006v-6c3.264-.749 6.328-2.254 8.321-9.113.898-3.092 1.679-1.931 1.679.574 0 2.071-.49 3.786-.921 5.533 1.061.543 3.371 1.402 6.12 1.556 1.055.059 1.024 1.455-.051 1.584l-1.394.167s-.608 1.111.142 1.116z" />
-                      </svg>
-                      {/* <p>J&apos;aime</p> */}
+                    <div id={id} className="content-social1">
+                      <Like
+                        id={id}
+                        get={favorite !== null ? favorite.includes(id) : false}
+                        favorite={favorite}
+                        setFavorite={setFavorite}
+                      />
                     </div>
                     <div className="content-social2">
                       <svg
@@ -187,6 +199,10 @@ export default function Gallery({ photoHeader }) {
                         width="25"
                         height="25"
                         fill="#53d496"
+                        id={url.time}
+                        onClick={() => {
+                          setCommentActive(url.time);
+                        }}
                       >
                         <g>
                           <path d="M19.2,3.8H4.8c-1.2,0-2.1,1-2.1,2.2v9.4c0,1.2,1,2.2,2.1,2.2h6.4v2c0,0.3,0.1,0.5,0.4,0.6c0.1,0.1,0.2,0.1,0.4,0.1   c0.1,0,0.3,0,0.4-0.1l4.6-2.7h2.2c1.2,0,2.1-1,2.1-2.2V5.9C21.3,4.7,20.4,3.8,19.2,3.8z M19.8,15.3c0,0.4-0.3,0.7-0.6,0.7h-2.4   c-0.1,0-0.3,0-0.4,0.1l-3.7,2.1v-1.5c0-0.4-0.3-0.8-0.8-0.8H4.8c-0.3,0-0.6-0.3-0.6-0.7V5.9c0-0.4,0.3-0.7,0.6-0.7h14.4   c0.3,0,0.6,0.3,0.6,0.7V15.3z" />
@@ -244,7 +260,13 @@ export default function Gallery({ photoHeader }) {
                           </div>
                         ))
                       : null}
-                    <div className="form-comment">
+                    <div
+                      className={
+                        url.time === commentActive
+                          ? 'form-comment active'
+                          : 'form-comment'
+                      }
+                    >
                       <input
                         type="text"
                         placeholder="votre commentaire"
@@ -262,11 +284,11 @@ export default function Gallery({ photoHeader }) {
                         />
 
                         <button
+                          key={url.time}
                           type="button"
                           className="buttonSendComment"
                           onClick={() => {
                             handleSubmitCommentary(id);
-
                             console.log(commentary);
                           }}
                         >
