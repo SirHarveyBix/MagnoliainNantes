@@ -90,6 +90,7 @@ export default function Gallery({ photoHeader }) {
       for (let id in imageUrls) {
         urls.push({ id, url: imageUrls[id] });
       }
+
       setImageUrl(urls);
     });
   };
