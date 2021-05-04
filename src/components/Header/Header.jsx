@@ -19,7 +19,10 @@ function Header({ photoHeader, user }) {
             />
           </g>
         </svg>
-        <p className="slogan">Magnolia in Nantes</p>
+        <p className="slogan">
+          Magnolia <br /> in <br />
+          Nantes
+        </p>
       </div>
       <div className="avatar">
         <h2 className="titleAvatar">{user}</h2>
