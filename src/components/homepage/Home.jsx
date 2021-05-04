@@ -3,7 +3,7 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from 'react';
 import './Home.css';
-import logo from './logo.png';
+
 import avatar1 from './avatars(1).png';
 import avatar2 from './avatars(2).png';
 import avatar3 from './avatars(3).png';
@@ -96,9 +96,7 @@ const Home = ({
 
   return (
     <div className="home">
-      <div className="home-header">
-        <img className="home-header-img" src={logo} alt="logo magnolia" />
-      </div>
+      <div className="home-header" />
       <form onSubmit={handleSubmit}>
         <div className="home-section-profil">
           <h2>Choisissez votre pseudo :</h2>

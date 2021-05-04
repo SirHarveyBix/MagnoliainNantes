@@ -7,7 +7,7 @@ function App() {
   const [photoHeader, setPhotoHeader] = useState(null);
   const [username, setUsername] = useState('');
   const [user, setUser] = useState('');
-  const [homeActive, setHomeActive] = useState(false);
+  const [homeActive, setHomeActive] = useState(true);
   const [magnoliaArray, setMagnoliaArray] = useState([]);
   const [showAll, setShowAll] = useState([magnoliaArray]);
 
@@ -32,7 +32,16 @@ function App() {
 
   useEffect(() => {
     getMagnolia();
-  }, []);
+    const loggedInUser = localStorage.getItem('name');
+    const loggedAvatar = localStorage.getItem('photo');
+
+    localStorage.getItem('isfound');
+    if (loggedInUser && loggedAvatar) {
+      setUser(loggedInUser);
+      setPhotoHeader(loggedAvatar);
+    }
+  }, [user, photoHeader]);
+
   return (
     <div className="App">
       <div className="clip" />

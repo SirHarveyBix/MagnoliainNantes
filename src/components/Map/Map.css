@@ -90,6 +90,7 @@ body {
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
   backdrop-filter: blur(1px);
+  padding: 10px;
 }
 .CardInfoTxt h3 {
   margin: 0px;
