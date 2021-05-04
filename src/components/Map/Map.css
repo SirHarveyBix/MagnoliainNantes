@@ -45,6 +45,9 @@ body {
   width: 100%;
   margin-bottom: 90px;
 }
+.marker {
+  fill: green;
+}
 .CardMap {
   box-sizing: border-box;
   border-top-left-radius: 50px;
@@ -85,12 +88,13 @@ body {
   justify-content: center;
   align-items: center;
   padding: 10px;
-  backdrop-filter: blur(1.5px);
+  backdrop-filter: blur(2px);
 }
 .CardInfoTxt h3 {
   margin: 0px;
   font-size: 1.5em;
 }
+
 .CardInfoSubTxt {
   display: flex;
   font-size: 0.8em;
@@ -99,7 +103,7 @@ body {
 }
 .CardInfoSubTxt p {
   margin-right: 10px;
-  font-size: 1.2em;
+  font-size: 1.5em;
 }
 .scoreMagno {
   width: 80px;

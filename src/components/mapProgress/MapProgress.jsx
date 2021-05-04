@@ -67,7 +67,7 @@ function MapProgress() {
                   </p>
                 </div>
                 <div className="ProgressBar">
-                  <ProgressBar width={200} progress={parc.found / parc.total} />
+                  <ProgressBar width={150} progress={parc.found / parc.total} />
                 </div>
               </div>
             </div>
