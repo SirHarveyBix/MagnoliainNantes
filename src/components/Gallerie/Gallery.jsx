@@ -81,9 +81,7 @@ export default function Gallery({ photoHeader }) {
         urls.push({ id, url: imageUrls[id] });
       }
 
-     
       setImageUrl(urls);
-      
     });
   };
   const deleteImage = (id) => {
