@@ -9,7 +9,7 @@
   height: 60px;
 }
 .slogan {
-  font-size: 1em;
+  font-size: 1.3em;
   color: #53d496;
   display: inline-block;
 }
@@ -23,7 +23,7 @@
   align-items: center;
 }
 .avatarImg {
-  width: 50px;
+  width: 45px;
   background-color: #65c9ff;
   border-radius: 100%;
 }
@@ -31,6 +31,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 5px 5px 15px;
+  padding: 10px 15px 5px 15px;
   margin-bottom: 48px;
 }

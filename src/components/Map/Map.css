@@ -200,11 +200,6 @@ body {
   font-family: 'Inter', sans-serif;
 }
 
-.avatar {
-  border-radius: 100px;
-  margin: 0.5em;
-  cursor: pointer;
-}
 .nav {
   z-index: 10;
 }
