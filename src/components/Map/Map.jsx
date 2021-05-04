@@ -277,7 +277,7 @@ const Map = ({ photoHeader, user }) => {
   return (
     <div>
       <p className="txtHead">
-        Où irez vous trouver votre prochain magnolia 🌸🌱🌸 ?
+        Où irez vous trouver votre prochain magnolia ? 🌸🌱🌸
       </p>
       <div
         className={isActive ? 'footerScore isActive' : 'footerScore notActive'}
