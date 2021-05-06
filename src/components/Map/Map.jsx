@@ -241,27 +241,27 @@ const Map = ({ photoHeader, user }) => {
     );
 
     allPlants.map((position) =>
-      position.distance <= 1500 &&
+      position.distance <= 10 &&
       position.fields.nom_du_site === 'Jardin des Plantes'
         ? add(countPlante, setCountPlant)
         : '' ||
-          (position.distance <= 1500 &&
+          (position.distance <= 10 &&
             position.fields.nom_du_site === 'Parc de Procé')
         ? add(countProce, setCountProce)
         : '' ||
-          (position.distance <= 1500 &&
+          (position.distance <= 10 &&
             position.fields.nom_du_site === 'Parc floral de la Beaujoire')
         ? add(countBeaujoire, setCountBeaujoire)
         : '' ||
-          (position.distance <= 1500 &&
+          (position.distance <= 10 &&
             position.fields.nom_du_site === 'Parc de la Gaudinière')
         ? add(countGaudiniere, setCountGaudiniere)
         : '' ||
-          (position.distance <= 1500 &&
+          (position.distance <= 10 &&
             position.fields.nom_du_site === 'Parc exotique du Grand-Blottereau')
         ? add(countBlotereau, setCountBlotereau)
         : '' ||
-          (position.distance <= 1500 &&
+          (position.distance <= 10 &&
             position.fields.nom_du_site === 'Arboretum Cimetière Parc')
         ? add(countCimetiere, setCountCimetiere)
         : ''
@@ -418,7 +418,7 @@ const Map = ({ photoHeader, user }) => {
                         <p className="popupContent">
                           {isFound.includes(plant.recordid)
                             ? 'Vous avez déjà cette plante'
-                            : plant.distance <= 1500
+                            : plant.distance <= 10
                             ? `Vous êtes à ${plant.distance} mètres de ce magnolia vous pouvez le cueillir `
                             : `Vous êtes à ${plant.distance} mètres de ce magnolia`}
                         </p>
@@ -429,7 +429,7 @@ const Map = ({ photoHeader, user }) => {
                             onClick={(e) => counter(e)}
                             disabled={
                               !(
-                                plant.distance <= 1500 &&
+                                plant.distance <= 10 &&
                                 !isFound.includes(plant.recordid)
                               )
                             }
