@@ -40,7 +40,7 @@ export default function Gallery({ photoHeader }) {
           300,
           300,
           'JPEG',
-          90,
+          100,
           0,
           (uri) => {
             resolve(uri);
