@@ -1,5 +1,6 @@
 .home {
   font-family: 'Inter', sans-serif;
+  margin-bottom: 300px;
 }
 .home-header {
   display: flex;
