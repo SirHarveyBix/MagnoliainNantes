@@ -1,14 +1,11 @@
-/* eslint-disable no-unused-expressions */
-
-/* eslint-disable no-shadow */
-/* eslint-disable no-undef */
-/* eslint-disable prefer-const */
 /* eslint-disable indent */
+/* eslint-disable no-shadow */
 /* eslint-disable no-unused-vars */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
+import Resizer from 'react-image-file-resizer';
 import firebase from './firebaseConfig';
 import './gallery.css';
 import like from './pouce.png';
@@ -35,11 +32,25 @@ export default function Gallery({ photoHeader }) {
   const readImages = async (e) => {
     e.preventDefault();
     const file = e.target.files[0];
-    console.log(e.target.files[0]);
-
-    let date1 = new Date();
-    let date2 = Date.now();
-    let dateLocale = date1.toLocaleString('fr-FR', {
+    // eslint-disable-next-line prettier/prettier
+    const resizeFile = (file) =>
+      new Promise((resolve) => {
+        Resizer.imageFileResizer(
+          file,
+          300,
+          300,
+          'JPEG',
+          90,
+          0,
+          (uri) => {
+            resolve(uri);
+          },
+          'file'
+        );
+      });
+    const date1 = new Date();
+    const date2 = Date.now();
+    const dateLocale = date1.toLocaleString('fr-FR', {
       weekday: 'long',
       year: 'numeric',
       month: 'long',
@@ -48,11 +59,13 @@ export default function Gallery({ photoHeader }) {
       minute: 'numeric',
       second: 'numeric',
     });
-    console.log(dateLocale);
+
+    // eslint-disable-next-line no-new
+    const image = await resizeFile(file);
 
     const storageRef = firebase.storage().ref().child(id);
     const imageRef = firebase.database().ref('images').child(id);
-    await storageRef.put(file);
+    await storageRef.put(image);
     storageRef.getDownloadURL().then((url) => {
       imageRef.child(src).set(url);
       imageRef.child(name).set(text);
@@ -84,10 +97,10 @@ export default function Gallery({ photoHeader }) {
   const getImageUrl = () => {
     const imageRef = firebase.database().ref('images');
 
-    imageRef.orderByChild('time').on('value', (snapshot) => {
+    imageRef.on('value', (snapshot) => {
       const imageUrls = snapshot.val();
       const urls = [];
-      for (let id in imageUrls) {
+      for (const id in imageUrls) {
         urls.push({ id, url: imageUrls[id] });
       }
 
@@ -112,7 +125,7 @@ export default function Gallery({ photoHeader }) {
     console.log(favorite);
   }, []);
   const handleSubmitCommentary = (id) => {
-    let commentRef = firebase
+    const commentRef = firebase
       .database()
       .ref('images')
       .child(id)
